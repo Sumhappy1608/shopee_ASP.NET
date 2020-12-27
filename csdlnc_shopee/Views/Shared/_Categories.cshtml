@@ -1,0 +1,10 @@
+﻿@model List<csdlnc_shopee.Models.DANHMUC>
+
+    <!-- Tab Nav -->
+        @foreach (var category in Model)
+        {
+            <a href="/Home/CategoryItem?categoryID=@category.MALOAI" >@category.TENLOAI</a>
+        }
+    <!--/ End Tab Nav -->
+
+

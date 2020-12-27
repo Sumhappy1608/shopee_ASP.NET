@@ -1,0 +1,111 @@
+﻿
+@using csdlnc_shopee.Models
+@{
+    ViewBag.Title = "Shopee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    shopeeEntities3 db = new shopeeEntities3();
+    var account = Session["account"] as TAIKHOANDANGNHAP;
+    var cartProducts = (from GH in db.GIOHANGs
+                        where GH.ID_NGUOIMUA == account.ID_THANHVIEN
+                        join HH in db.HANGHOAs on GH.MAHANGHOA equals HH.MAHANGHOA
+                        select new
+                        {
+                            id_hh = HH.MAHANGHOA,
+                            ten = HH.TENHANGHOA,
+                            soluong = GH.SOLUONG,
+                            giathanh = HH.GIATHANH,
+                            tongtien = GH.SOLUONG * HH.GIATHANH
+                        });
+    double total = 0;
+    if (cartProducts != null)
+    {
+        foreach (var item in cartProducts)
+        {
+            total += Convert.ToDouble(item.tongtien);
+        }
+
+    }
+}
+<link rel="stylesheet" href="~/Assets/client/css/style.css">
+
+<div class="container">
+    <div class="row cart">
+        <div class="card" style="width: 100%">
+            <table class="table table-hover shopping-cart-wrap">
+                <thead class="text-muted">
+                    <tr>
+                        <th scope="col">Sản phẩm</th>
+                        <th scope="col" width="120" class="text-center">Số lượng</th>
+                        <th scope="col" width="120" class="text-center">Tổng tiền</th>
+                        <th scope="col" width="200" class="text-center">Thao tác</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var productItem in cartProducts)
+                    {
+
+                        <tr>
+                            <td>
+                                <figure class="media">
+                                    <div class="img-wrap"><img src="https://robohash.org/@productItem.ten" class="img-thumbnail img-sm" width="100" height="100"></div>
+                                    <figcaption class="media-body" style="max-width: 70%; margin-left: 8px">
+                                        <div class="title text-truncate one-line-text">@productItem.ten </div>
+
+                                    </figcaption>
+                                </figure>
+                            </td>
+                            <td>
+                                <input class="form-control text-center" id="exampleInputEmail1"
+                                       value="@productItem.soluong">
+                            </td>
+                            <td>
+                                <div class="price-wrap">
+                                    <var class="price">@productItem.tongtien</var>
+                                    <small class="text-muted">Giá thành: @productItem.giathanh</small>
+                                </div> <!-- price-wrap .// -->
+                            </td>
+                            <td class="text-center">
+                                @using (Html.BeginForm("CheckoutOne", "Checkout", new { productID = productItem.id_hh.Trim() }, FormMethod.Post))
+                                {
+                                    <button type="submit" class="btn">
+                                        <span class="glyphicon glyphicon-ok ">Thanh toán</span>
+                                    </button>
+                                }
+
+                                @using (Html.BeginForm("RemoveFromCart", "Cart", new { productID = productItem.id_hh },
+                                   FormMethod.Post))
+                                {
+                                    <button type="submit" class="alert-danger btn">
+                                        <span class="glyphicon glyphicon-remove">Xóa</span>
+                                    </button>
+                                }
+                            </td>
+                        </tr>
+
+                    }
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>
+                            @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                            {
+                                <button type="button" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span> Tiếp tục mua
+                                </button>
+                            }
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success">
+                                Thanh toán <span class="glyphicon glyphicon-play"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> <!-- card.// -->
+
+    </div>
+</div>
+
+

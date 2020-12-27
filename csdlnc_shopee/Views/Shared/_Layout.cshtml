@@ -1,0 +1,406 @@
+﻿@using csdlnc_shopee.Models
+@{
+    var account = Session["account"] as csdlnc_shopee.Models.TAIKHOANDANGNHAP;
+    shopeeEntities3 db = new shopeeEntities3();
+
+    bool isLogIn = account == null ? false : true;
+
+}
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head runat="server">
+    <!-- Meta Tag -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name='copyright' content=''>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Title Tag  -->
+    <title>Shopee Việt Nam | Mua và Bán Trên Ứng Dụng Di Động Hoặc Website</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="~/Assets/client/images/favicon.png">
+    <!-- Web Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
+          rel="stylesheet">
+
+    <!-- StyleSheet -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="~/Assets/client/css/bootstrap.css">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="~/Assets/client/css/magnific-popup.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Assets/client/css/font-awesome.css">
+    <!-- Fancybox -->
+    <link rel="stylesheet" href="~/Assets/client/css/jquery.fancybox.min.css">
+    <!-- Themify Icons -->
+    <link rel="stylesheet" href="~/Assets/client/css/themify-icons.css">
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="~/Assets/client/css/niceselect.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="~/Assets/client/css/animate.css">
+    <!-- Flex Slider CSS -->
+    <link rel="stylesheet" href="~/Assets/client/css/flex-slider.min.css">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="~/Assets/client/css/owl-carousel.css">
+    <!-- Slicknav -->
+    <link rel="stylesheet" href="~/Assets/client/css/slicknav.min.css">
+
+    <!-- Eshop StyleSheet -->
+    <link rel="stylesheet" href="~/Assets/client/css/reset.css">
+    <link rel="stylesheet" href="~/Assets/client/css/style.css">
+    <link rel="stylesheet" href="~/Assets/client/css/responsive.css">
+</head>
+
+<body class="js">
+    <form id="form1" runat="server">
+        <div>
+            <!-- Header -->
+            <header class="header shop">
+                <!-- Topbar -->
+                <div class="topbar">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 col-12">
+                                <!-- Top Left -->
+                                <div class="top-left">
+                                    <ul class="list-main">
+                                        <li>Kênh Người Bán</li>
+                                        <li>Tải ứng dụng</li>
+                                        <li>Kết nối</li>
+                                        <li><i class="ti-facebook"></i><i class="ti-instagram"></i></li>
+                                    </ul>
+                                </div>
+                                <!--/ End Top Left -->
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-12">
+                                <!-- Top Right -->
+                                <div class="right-content">
+                                    <ul class="list-main">
+                                        <li><i class="ti-bell"></i>Thông báo</li>
+                                        <li><i class="ti-help-alt"></i><a href="#">Trợ giúp</a></li>
+
+                                        @if (isLogIn) //Nếu có tài khoản
+                                        {
+                                            <li><i class="ti-user"></i><a href="/">@account.TENDANGNHAP</a></li>
+                                            <li><i class="ti-power-off"></i><a href="/Login/Logout">Đăng xuất</a></li>
+                                        }
+                                        else //Nếu không có tài khoản
+                                        {
+                                            <li><i class="ti-user"></i><a href="#">Đăng ký</a></li>
+                                            <li><i class="ti-power-off"></i><a href="/Login">Đăng nhập</a></li>
+                                        }
+                                        @*<li><i class="ti-power-off"></i><a href="/Login">Login</a></li>*@
+                                    </ul>
+                                </div>
+                                <!-- End Top Right -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Topbar -->
+                <div class="middle-inner">
+                    <div class="container">
+                        <div class="row d-flex align-items-center">
+                            <div class="col-lg-3 col-md-3 col-12">
+                                <!-- Logo -->
+                                <div class="logo">
+                                    <a href="/  ">
+                                        <img src="https://cf.shopee.vn/file/c8ebfae52b8a127613684cc4f08f285d" alt="logo"
+                                             class="logo-img">
+                                    </a>
+                                </div>
+                                <!-- Search Form -->
+                                <div class="search-top">
+                                    <div class="top-search"><a href="#0"><i class="ti-search"></i></a></div>
+                                    <!-- Search Form -->
+                                    <div class="search-top">
+                                        <form class="search-form">
+                                            <input type="text" placeholder="Tìm kiếm sản phẩm....." name="search">
+                                            <button value="search" type="submit"><i class="ti-search"></i></button>
+                                        </form>
+                                    </div>
+                                    <!--/ End Search Form -->
+                                </div>
+                                <!--/ End Search Form -->
+                                <div class="mobile-nav"></div>
+                            </div>
+
+                            <div class="col-lg-8 col-md-8 col-12">
+                                <div class="search-bar-top">
+                                    <div class="search-bar">
+                                        <form action="/Home/search/?search" method="get">
+                                            <input name="search" placeholder="Tìm kiếm sản phẩm....." type="search">
+                                            <button class="btnn"><i class="ti-search"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="more-search">
+                                    @{ Html.RenderAction("Categories", "Home");}
+                                    @*<a href="/search?keyword=b%C3%A0n%20ph%C3%ADm%20c%C6%A1">Bàn Phím Cơ</a>
+                                    <a href="/search?keyword=rk918">RK918</a>
+                                    <a href="/search?keyword=corsair%20k70">Corsair K70</a>
+                                    <a href="/search?keyword=b%C3%A0n%20ph%C3%ADm%20c%C6%A1%20dareu">
+                                        Bàn Phím Cơ
+                                        Dareu
+                                    </a>
+                                    <a href="/search?keyword=b%C3%A0n%20ph%C3%ADm">bàn phím</a>
+                                    <a href="/search?keyword=tai%20nghe%20akg">Tai Nghe AKG</a>
+                                    <a href="/search?keyword=b%C3%A0n%20ph%C3%ADm%20c%C6%A1%20mini">Bàn Phím Cơ Mini</a>
+                                    <a href="/search?keyword=b%C3%A0n%20ph%C3%ADm%20game%20th%E1%BB%A7">
+                                        Bàn Phím Game
+                                        Thủ
+                                    </a>.*@
+                                </div>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-12">
+                                <div class="right-bar">
+                                    <!-- Search Form -->
+                                    @if (isLogIn)
+                                    {
+                                        var cartProducts = (from GH in db.GIOHANGs
+                                                            where GH.ID_NGUOIMUA == account.ID_THANHVIEN
+                                                            join HH in db.HANGHOAs on GH.MAHANGHOA equals HH.MAHANGHOA
+                                                            select new
+                                                            {
+                                                                ten = HH.TENHANGHOA,
+                                                                soluong = GH.SOLUONG,
+                                                                giathanh = HH.GIATHANH,
+                                                                tongtien = GH.SOLUONG * HH.GIATHANH
+                                                            });
+                                        <div class="sinlge-bar shopping">
+                                            <a href="/Cart" class="single-icon">
+                                                <i class="ti-bag"></i><span class="total-count">@cartProducts.Count()</span>
+                                            </a>
+                                            <!-- Shopping Item -->
+                                            <div class="shopping-item">
+                                                <div class="dropdown-cart-header">
+                                                    <span>Sản phẩm mới thêm </span>
+                                                </div>
+                                                <ul class="shopping-list">
+                                                    @foreach (var cartProduct in cartProducts)
+                                                    {
+
+                                                        <li>
+
+                                                            <a class="cart-img" href="#">
+                                                                <img src="https://via.placeholder.com/70x70" alt="#">
+                                                            </a>
+                                                            <h4><a href="#">@cartProduct.ten</a></h4>
+                                                            <p class="quantity">
+                                                                @cartProduct.soluong<span class="amount">@cartProduct.giathanh</span>
+                                                            </p>
+                                                            <p class="amount">Tổng tiền: @cartProduct.tongtien</p>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                                <div class="bottom">
+                                                    <a href="/Cart" class="btn">Xem giỏ hàng</a>
+                                                </div>
+                                            </div>
+
+                                            <!--/ End Shopping Item -->
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                    </div>
+                </div>
+            </header>
+            <!--/ End Header -->
+            <div class="body-content">
+                @RenderBody()
+            </div>
+
+            <!-- Start Footer Area -->
+            <footer class="footer">
+                <!-- Footer Top -->
+                <div class="  section">
+                    <div class="container">
+                        <div class="d-flex">
+                            <div class="col-5-elements">
+                                <div>Chăm sóc khách hàng</div>
+                                <ul>
+                                    <li><a href="https://help.shopee.vn/vn/s" title="">Trung tâm trợ giúp</a></li>
+                                    <li>
+                                        <a href="https://shopee.vn/blog" title="">
+                                            Shopee
+                                            Blog
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://help.shopee.vn/vn/s/article/C%C3%A1c-c%C3%A2u-h%E1%BB%8Fi-li%C3%AAn-quan-%C4%91%E1%BA%BFn-SHOPEE-MALL"
+                                           title="">Shopee Mall</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://help.shopee.vn/vn/s/article/H%C6%B0%E1%BB%9Bng-d%E1%BA%ABn-mua-h%C3%A0ng-t%E1%BA%A1i-Shopee-1542942315487"
+                                           title="">Hướng dẫn mua hàng</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://help.shopee.vn/vn/s/article/L%C3%A0m-c%C3%A1ch-n%C3%A0o-%C4%91%E1%BB%83-b%E1%BA%AFt-%C4%91%E1%BA%A7u-%C4%91%C4%83ng-b%C3%A1n-tr%C3%AAn-Shopee-1542942317110"
+                                           title="">Hướng dẫn bán hàng</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://help.shopee.vn/vn/s/topic/0TO6F000000QzBjWAK/thanh-to%C3%A1n"
+                                           title="">Thanh toán</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://help.shopee.vn/vn/s/article/Shopee-Xu-l%C3%A0-g%C3%AC-1542942386643"
+                                           title="">Shopee Xu</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://help.shopee.vn/vn/s/topic/0TO6F000000QzKWWA0/v%E1%BA%ADn-chuy%E1%BB%83n"
+                                           title="">Vận chuyển</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://help.shopee.vn/vn/s/article/C%C3%A1c-c%C3%A2u-h%E1%BB%8Fi-li%C3%AAn-quan-%C4%91%E1%BA%BFn-Tr%E1%BA%A3-h%C3%A0ng-Ho%C3%A0n-ti%E1%BB%81n-1542942680526"
+                                           title="">Trả hàng &amp; Hoàn tiền</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://help.shopee.vn/vn/s/contactus" title="">Chăm sóc khách hàng</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://help.shopee.vn/vn/s/article/CH%C3%8DNH-S%C3%81CH-B%E1%BA%A2O-H%C3%80NH-T%E1%BA%A0I-SHOPEE-1542942563283"
+                                           title="">Chính sách bảo hành</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-5-elements">
+                                <div>Về Shopee</div>
+                                <ul>
+                                    <li>
+                                        <a href="https://careers.shopee.com/about/" title="">
+                                            Giới thiệu về
+                                            Shopee Việt Nam
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://careers.shopee.com/jobs" title="">Tuyển dụng</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://shopee.vn/legaldoc/policies/" title="">
+                                            Điều Khoản
+                                            Shopee
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://shopee.vn/docs/3603" title="">
+                                            Chính sách bảo
+                                            mật
+                                        </a>
+                                    </li>
+                                    <li><a href="https://shopee.vn/mall/" title="">Chính Hãng</a></li>
+                                    <li>
+                                        <a href="https://banhang.shopee.vn/" title="">Kênh Người bán</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://shopee.vn/flash_sale/" title="">Flash Sales</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://shopee.vn/affiliate/" title="">
+                                            Chương trình Tiếp
+                                            thị liên kết
+                                            Shopee
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="mailto:media.vn%40shopee.com" title="media.vn@shopee.com">
+                                            Liên
+                                            Hệ Với Truyền
+                                            Thông
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-5-elements">
+                                <div>Thanh toán</div>
+                                <img src="~/Assets/client/images/payments.png" />
+                                <div>Đơn vị vận chuyển</div>
+                                <img src="~/Assets/client/images/shippers.PNG" />
+
+                            </div>
+                            <div class="col-5-elements">
+                                <div>Theo dõi chúng tôi trên</div>
+                                <ul>
+                                    <li>
+                                        <a href="https://vi-vn.facebook.com/ShopeeVN/" title="">
+                                            <i class="ti-facebook"></i>Facebook
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.instagram.com/shopee_vn/?hl=en" title="">
+                                            <i class="ti-instagram"></i>Instagram
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.linkedin.com/company/shopee/" title="">
+                                            <i class="ti-linkedin"></i>LinkedIn
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-5-elements">
+                                <div>Tải ứng dụng Shopee ngay thôi</div>
+                                <div class="d-flex">
+                                    <img src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/assets/f184c0b68a2d385feb5d70a76396230b.png"
+                                         alt="download_qr_code" class="qr-code">
+                                    <div class="d-flex flex-column justify-content-around">
+                                        <img src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/assets/759416b55e2bd69ecc360ee2faab7ad0.png"
+                                             alt="App Store" class="download-link">
+                                        <img src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/assets/2679f513b5f9e235adf2c6c288617e7b.png"
+                                             alt="Play Store" class="download-link">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- /End Footer Area -->
+
+        </div>
+
+    </form>
+
+    <!-- Jquery -->
+    <script src="Assets/client/js/jquery.min.js"></script>
+    <script src="Assets/client/js/jquery-migrate-3.0.0.js"></script>
+    <script src="Assets/client/js/jquery-ui.min.js"></script>
+    <!-- Popper JS -->
+    <script src="Assets/client/js/popper.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="Assets/client/js/bootstrap.min.js"></script>
+    <!-- Color JS -->
+    <script src="Assets/client/js/colors.js"></script>
+    <!-- Slicknav JS -->
+    <script src="Assets/client/js/slicknav.min.js"></script>
+    <!-- Owl Carousel JS -->
+    <script src="Assets/client/js/owl-carousel.js"></script>
+    <!-- Magnific Popup JS -->
+    <script src="Assets/client/js/magnific-popup.js"></script>
+    <!-- Waypoints JS -->
+    <script src="Assets/client/js/waypoints.min.js"></script>
+    <!-- Countdown JS -->
+    <script src="Assets/client/js/finalcountdown.min.js"></script>
+    <!-- Nice Select JS -->
+    <script src="Assets/client/js/nicesellect.js"></script>
+    <!-- Flex Slider JS -->
+    <script src="Assets/client/js/flex-slider.js"></script>
+    <!-- ScrollUp JS -->
+    <script src="Assets/client/js/scrollup.js"></script>
+    <!-- Onepage Nav JS -->
+    <script src="Assets/client/js/onepage-nav.min.js"></script>
+    <!-- Easing JS -->
+    <script src="Assets/client/js/easing.js"></script>
+    <!-- Active JS -->
+    <script src="Assets/client/js/active.js"></script>
+</body>
+
+</html>

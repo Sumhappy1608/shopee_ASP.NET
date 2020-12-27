@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var billInfo = ViewBag.BILLINFO;
+    var voucherInfo = ViewBag.VOUCHERINFO;
+    var SOTIENTT = (voucherInfo != null && billInfo.TONGTIEN - voucherInfo.mucgia > 0) ? billInfo.TONGTIEN - Math.Min(billInfo.TONGTIEN * voucherInfo.uudai, voucherInfo.giamtoida) : billInfo.TONGTIEN;
+}
+
+<div class="container card">
+    @using (Html.BeginForm("PaymentConfirm", "Checkout", FormMethod.Post))
+    {
+
+        <input type="text" name="billID" value="@ViewBag.BILLID" style="display:none" />
+        <input type="text" name="voucherID" value="@ViewBag.VOUCHERID" style="display:none" />
+        <div class="d-flex align-item-center">
+            <p>Phương thức thanh toán</p>
+            <div class="input-wrapper">
+                @Html.RadioButton("paymentMethod", "Ví AirPay")Ví AirPay
+            </div>
+            <div class="input-wrapper">
+
+                @Html.RadioButton("paymentMethod", "Thẻ tín dụng")Thẻ tín dụng
+            </div>
+            <div class="input-wrapper">
+                @Html.RadioButton("paymentMethod", "Thẻ ghi nợ")Thẻ ghi nợ
+            </div>
+            <div class="input-wrapper">
+                @Html.RadioButton("paymentMethod", "Thanh toán khi nhận hàng")Thanh toán khi nhận hàng
+            </div>
+        </div>
+        <div class="d-flex justify-content-end">
+            <div class="d-flex flex-column float-right" style="width: 20%">
+
+                <p>Thành tiền: <span>@billInfo.TONGTIEN</span></p>
+                <p>Giảm giá: <span>@Math.Abs(SOTIENTT - billInfo.TONGTIEN)</span></p>
+                <p>Tổng thu  <span>@SOTIENTT</span></p>
+                <div>
+                    <button type="submit" class="btn " style="display: block;">THANH TOÁN</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

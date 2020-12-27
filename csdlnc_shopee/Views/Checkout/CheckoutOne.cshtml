@@ -1,0 +1,95 @@
+﻿
+
+@using csdlnc_shopee.Models
+@model HANGHOA
+@{
+
+    ViewBag.Title = "CheckoutOne";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    shopeeEntities3 db = new shopeeEntities3();
+    var account = Session["account"] as TAIKHOANDANGNHAP;
+    var userInformation = db.THANHVIENs.Where(x => x.ID_THANHVIEN == account.ID_THANHVIEN).SingleOrDefault();
+    var productItem = (from GH in db.GIOHANGs
+                       where GH.ID_NGUOIMUA == account.ID_THANHVIEN && GH.MAHANGHOA == Model.MAHANGHOA
+                       join HH in db.HANGHOAs on GH.MAHANGHOA equals HH.MAHANGHOA
+                       select new
+                       {
+                           id_hh = HH.MAHANGHOA,
+                           gianhang = HH.MAGIANHANG,
+                           ten = HH.TENHANGHOA,
+                           giathanh = HH.GIATHANH,
+                           soluong = GH.SOLUONG
+                       }).SingleOrDefault();
+    var totalPrice = productItem.giathanh * productItem.soluong;
+}
+<div class="container card">
+    <div style="padding: 24px">
+        <i class="ti-location-pin"><span style="text-transform: capitalize">Địa chỉ nhận hàng</span></i>
+        <p style="font-weight: 700 !important">@account.TENDANGNHAP</p>
+        <p class="one-line-text">Địa chỉ:&nbsp;@userInformation.DIACHI_TV</p>
+        <p class="one-line-text">Số điện thoại:&nbsp;@userInformation.DIENTHOAI_TV</p>
+    </div>
+</div>
+<div class="container card">
+    <table class="table table-hover shopping-cart-wrap">
+        <thead class="text-muted">
+            <tr>
+                <th scope="col">Sản phẩm</th>
+                <th scope="col" width="120" class="text-center">Đơn giá</th>
+                <th scope="col" width="120" class="text-center">Số lượng</th>
+                <th scope="col" width="120" class="text-center">Thành tiền</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <figure class="media">
+                        <div class="img-wrap"><img src="https://robohash.org/@productItem.ten" class="img-thumbnail img-sm" width="100" height="100"></div>
+                        <figcaption class="media-body" style="max-width: 70%; margin-left: 8px">
+                            <div class="title text-truncate one-line-text">@productItem.ten </div>
+
+                        </figcaption>
+                    </figure>
+                </td>
+                <td>
+                    <div class="price-wrap">
+                        <small class="text-muted">Giá thành: @productItem.giathanh</small>
+                    </div> <!-- price-wrap .// -->
+                </td>
+                <td>
+                    <input type="email" class="form-control text-center" id="exampleInputEmail1"
+                           value="@productItem.soluong">
+                </td>
+                <td>
+                    <div class="price-wrap">
+                        <var class="price">@totalPrice</var>
+                    </div> <!-- price-wrap .// -->
+                </td>
+
+            </tr>
+
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-between">
+        @using (Html.BeginForm("CheckoutProduct", "Checkout", FormMethod.Post))
+        {
+            <p class="active"> Đơn vị vận chuyển</p>
+            <input name="productID" value="@productItem.id_hh" style="display: none;" />
+            @Html.DropDownList("shipping", (IEnumerable<SelectListItem>)ViewBag.DVVCLIST, new { @class = "form-control" })
+            <p class="active">Voucher</p>
+            if (ViewBag.VOUCHERLIST.Items.Count == 0)
+            {
+                <div class="alert alert-danger">Không có voucher phù hợp !</div>
+                <input name="voucher" value="" style="display:none" />
+            }
+            else
+            {
+                @Html.DropDownList("voucherID", (IEnumerable<SelectListItem>)ViewBag.VOUCHERLIST, new { @class = "form-control" })
+            }
+            <button type="submit" class="btn btn-primary btn-block btn-large" style="margin-top: 16px">TIẾP TỤC</button>
+        }
+    </div>
+</div>
+

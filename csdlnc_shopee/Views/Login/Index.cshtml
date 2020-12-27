@@ -1,0 +1,44 @@
+﻿<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+@{
+	ViewBag.Title = "Shopee";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	bool isLoginFailed = Request.Params["state"] == "false";
+}
+
+
+<div class="login">
+	<div class="main">
+		<div class="form">
+			<div class="form-input">
+				<h1>Đăng nhập</h1>
+				@if (isLoginFailed)
+				{
+					<div class="alert alert-danger" role="alert">
+						Sai tên đăng nhập hoặc mật khẩu !
+					</div>
+				}
+				@using (Html.BeginForm("Login", "Login", FormMethod.Post))
+				{
+					<input type="text" name="TENDANGNHAP" placeholder="Username" required="required" />
+					<input type="password" name="MATKHAU" placeholder="Password" required="required" />
+					<button type="submit" class="btn btn-primary btn-block btn-large" style="margin-top: 16px">ĐĂNG NHẬP</button>
+				}
+				<div class="d-flex justify-content-between">
+					<p class="active">
+						Quên mật khẩu
+					</p>
+					<p>Đăng nhập với SMS</p>
+				</div>
+				<div class="d-flex justify-content-center">
+					Bạn mới biết đến Shopee?&nbsp<span class="active">
+						<a href="/SignUp">Đăng ký</a>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,1811 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="shopeeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DANHMUC">
+          <Key>
+            <PropertyRef Name="MALOAI" />
+          </Key>
+          <Property Name="MALOAI" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="TENLOAI" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="CHITIETLOAI" Type="nvarchar(max)" />
+          <Property Name="NGANHHANG" Type="char" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DATHANG">
+          <Key>
+            <PropertyRef Name="ID_DONHANG" />
+          </Key>
+          <Property Name="ID_DONHANG" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="NGUOIMUA" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="GIANHANG" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="NGAYDAT" Type="datetime" Nullable="false" />
+          <Property Name="TONGTIEN" Type="money" Nullable="false" />
+          <Property Name="MADVVC" Type="char" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DONHANG">
+          <Key>
+            <PropertyRef Name="ID_DONHANG" />
+            <PropertyRef Name="MASANPHAM" />
+          </Key>
+          <Property Name="ID_DONHANG" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="MASANPHAM" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="SOLUONG" Type="int" Nullable="false" />
+          <Property Name="DONGIA" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DONMUA">
+          <Key>
+            <PropertyRef Name="MADONVAN" />
+          </Key>
+          <Property Name="MADONVAN" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="MADVVC" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="ID_DONHANG" Type="char" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DONVIVANCHUYEN">
+          <Key>
+            <PropertyRef Name="MADONVI" />
+          </Key>
+          <Property Name="MADONVI" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="TENDONVI" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="DIENTHOAI_DVVC" Type="int" Nullable="false" />
+          <Property Name="EMAIL_DVVC" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="GIANHANG">
+          <Key>
+            <PropertyRef Name="MAGIANHANG" />
+          </Key>
+          <Property Name="MAGIANHANG" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="TENGIANHANG" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DANHGIA_GIANHANG" Type="float" Nullable="false" />
+          <Property Name="LuongNguoiTheoDoi" Type="int" Nullable="false" />
+          <Property Name="ID_NGUOIBAN" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="LoaiGianHang" Type="char" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GIOHANG">
+          <Key>
+            <PropertyRef Name="ID_NGUOIMUA" />
+            <PropertyRef Name="MAHANGHOA" />
+          </Key>
+          <Property Name="ID_NGUOIMUA" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="MAHANGHOA" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="SOLUONG" Type="int" Nullable="false" />
+          <Property Name="NGAYTHEM" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HANGHOA">
+          <Key>
+            <PropertyRef Name="MAHANGHOA" />
+          </Key>
+          <Property Name="MAHANGHOA" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="TENHANGHOA" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="MOTA" Type="nvarchar(max)" />
+          <Property Name="GIATHANH" Type="money" Nullable="false" />
+          <Property Name="SOLUONGTON" Type="int" Nullable="false" />
+          <Property Name="LOAIHANGHOA" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="HHFlag" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="DANHGIA_HANGHOA" Type="float" Nullable="false" />
+          <Property Name="THOIHANSUDUNG" Type="datetime" />
+          <Property Name="SOLUONGDABAN" Type="int" Nullable="false" />
+          <Property Name="MAGIANHANG" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="NGAYDANG" Type="datetime" Nullable="false" />
+          <Property Name="HINHANH" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LICHSUDANHGIAGIANHANG">
+          <Key>
+            <PropertyRef Name="MAGIANHANG" />
+            <PropertyRef Name="ID_NGUOIMUA" />
+            <PropertyRef Name="NGAYDANHGIA_GIANHANG" />
+          </Key>
+          <Property Name="MAGIANHANG" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="ID_NGUOIMUA" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="NGAYDANHGIA_GIANHANG" Type="datetime" Nullable="false" />
+          <Property Name="SOSAO_GIANHANG" Type="int" Nullable="false" />
+          <Property Name="NHANXET_GIANHANG" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="LICHSUDANHGIAHANGHOA">
+          <Key>
+            <PropertyRef Name="MAHANGHOA" />
+            <PropertyRef Name="ID_NGUOIMUA" />
+            <PropertyRef Name="NGAYDANHGIA_HANGHOA" />
+          </Key>
+          <Property Name="MAHANGHOA" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="ID_NGUOIMUA" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="NGAYDANHGIA_HANGHOA" Type="datetime" Nullable="false" />
+          <Property Name="SOSAO_HANGHOA" Type="int" Nullable="false" />
+          <Property Name="NHANXET_HANGHOA" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="LICHSUTHEODOIGIANHANG">
+          <Key>
+            <PropertyRef Name="MAGIANHANG" />
+            <PropertyRef Name="ID_NGUOIMUA" />
+          </Key>
+          <Property Name="MAGIANHANG" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="ID_NGUOIMUA" Type="char" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LICHSUXEMHANGHOA">
+          <Key>
+            <PropertyRef Name="ID_TAIKHOAN" />
+            <PropertyRef Name="MAHANGHOA" />
+            <PropertyRef Name="THOIGIANTRUYCAP" />
+          </Key>
+          <Property Name="ID_TAIKHOAN" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="MAHANGHOA" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="THOIGIANTRUYCAP" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LOAIVOUCHER">
+          <Key>
+            <PropertyRef Name="MALOAIVOUCHER" />
+          </Key>
+          <Property Name="MALOAIVOUCHER" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="TENLOAIVOUCHER" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DIEUKIEN" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LOAIGIAM" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="MUCGIA" Type="money" Nullable="false" />
+          <Property Name="UUDAI" Type="int" Nullable="false" />
+          <Property Name="GIAMTOIDA" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NGANHHANG">
+          <Key>
+            <PropertyRef Name="MANGANHHANG" />
+          </Key>
+          <Property Name="MANGANHHANG" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="TENNGANHHANG" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TAIKHOANDANGNHAP">
+          <Key>
+            <PropertyRef Name="ID_TAIKHOAN" />
+          </Key>
+          <Property Name="ID_TAIKHOAN" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="TENDANGNHAP" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="MATKHAU" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ID_THANHVIEN" Type="char" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="THANHTOAN">
+          <Key>
+            <PropertyRef Name="SO_THANHTOAN" />
+          </Key>
+          <Property Name="SO_THANHTOAN" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="NGAYTHANHTOAN" Type="datetime" Nullable="false" />
+          <Property Name="ID_DONHANG" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="SOTIENTT" Type="money" Nullable="false" />
+          <Property Name="UUDAI" Type="char" MaxLength="20" />
+          <Property Name="LOAITHANHTOAN" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="HOANTIEN" Type="money" />
+          <Property Name="LOAITTONLINE" Type="char" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="THANHVIEN">
+          <Key>
+            <PropertyRef Name="ID_THANHVIEN" />
+          </Key>
+          <Property Name="ID_THANHVIEN" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="EMAIL_TV" Type="varchar" MaxLength="30" />
+          <Property Name="DIENTHOAI_TV" Type="int" Nullable="false" />
+          <Property Name="DIACHI_TV" Type="nvarchar(max)" />
+          <Property Name="NGUOIBANFLAG" Type="int" Nullable="false" />
+          <Property Name="NGUOIMUAFLAG" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="THONGTINDONHANG">
+          <Key>
+            <PropertyRef Name="ID_DONHANG" />
+            <PropertyRef Name="THOIGIAN" />
+          </Key>
+          <Property Name="ID_DONHANG" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="THOIGIAN" Type="datetime" Nullable="false" />
+          <Property Name="TINHTRANG_DH" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="THONGTINVANCHUYEN">
+          <Key>
+            <PropertyRef Name="MADONVAN" />
+            <PropertyRef Name="THOIGIAN" />
+          </Key>
+          <Property Name="MADONVAN" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="THOIGIAN" Type="datetime" Nullable="false" />
+          <Property Name="TINHTRANG_VC" Type="nvarchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VOUCHER">
+          <Key>
+            <PropertyRef Name="MACODE" />
+          </Key>
+          <Property Name="MACODE" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="THOIGIANAPDUNG" Type="datetime" Nullable="false" />
+          <Property Name="LOAIVOUCHER" Type="char" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VOUCHER_GIANHANG">
+          <Key>
+            <PropertyRef Name="MAVOUCHER" />
+            <PropertyRef Name="MAGIANHANG" />
+          </Key>
+          <Property Name="MAVOUCHER" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="MAGIANHANG" Type="char" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VOUCHER_NGANHHANG">
+          <Key>
+            <PropertyRef Name="MAVOUCHER" />
+            <PropertyRef Name="MANGANHHANG" />
+          </Key>
+          <Property Name="MAVOUCHER" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="MANGANHHANG" Type="char" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VOUCHER_NGUOIDUNG">
+          <Key>
+            <PropertyRef Name="MAVOUCHER" />
+            <PropertyRef Name="ID_NGUOIMUA" />
+          </Key>
+          <Property Name="MAVOUCHER" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="ID_NGUOIMUA" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="TRANGTHAIDUNG" Type="int" />
+        </EntityType>
+        <Association Name="FK__DATHANG__GIANHAN__5070F446">
+          <End Role="GIANHANG" Type="Self.GIANHANG" Multiplicity="1" />
+          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIANHANG">
+              <PropertyRef Name="MAGIANHANG" />
+            </Principal>
+            <Dependent Role="DATHANG">
+              <PropertyRef Name="GIANHANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DATHANG__MADVVC__4F7CD00D">
+          <End Role="DONVIVANCHUYEN" Type="Self.DONVIVANCHUYEN" Multiplicity="1" />
+          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DONVIVANCHUYEN">
+              <PropertyRef Name="MADONVI" />
+            </Principal>
+            <Dependent Role="DATHANG">
+              <PropertyRef Name="MADVVC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HANGHOA__MAGIANH__3C69FB99">
+          <End Role="GIANHANG" Type="Self.GIANHANG" Multiplicity="1" />
+          <End Role="HANGHOA" Type="Self.HANGHOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIANHANG">
+              <PropertyRef Name="MAGIANHANG" />
+            </Principal>
+            <Dependent Role="HANGHOA">
+              <PropertyRef Name="MAGIANHANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DANHMUC_NGANHHANG_NGANHHANG">
+          <End Role="NGANHHANG" Type="Self.NGANHHANG" Multiplicity="1" />
+          <End Role="DANHMUC" Type="Self.DANHMUC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NGANHHANG">
+              <PropertyRef Name="MANGANHHANG" />
+            </Principal>
+            <Dependent Role="DANHMUC">
+              <PropertyRef Name="NGANHHANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DATHANG_THANHVIEN_NGUOIMUA">
+          <End Role="THANHVIEN" Type="Self.THANHVIEN" Multiplicity="1" />
+          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID_THANHVIEN" />
+            </Principal>
+            <Dependent Role="DATHANG">
+              <PropertyRef Name="NGUOIMUA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DONHANG_HANGHOA">
+          <End Role="HANGHOA" Type="Self.HANGHOA" Multiplicity="1" />
+          <End Role="DONHANG" Type="Self.DONHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HANGHOA">
+              <PropertyRef Name="MAHANGHOA" />
+            </Principal>
+            <Dependent Role="DONHANG">
+              <PropertyRef Name="MASANPHAM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DONMUA_DATHANG_ID_DONHANG">
+          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="1" />
+          <End Role="DONMUA" Type="Self.DONMUA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATHANG">
+              <PropertyRef Name="ID_DONHANG" />
+            </Principal>
+            <Dependent Role="DONMUA">
+              <PropertyRef Name="ID_DONHANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DONMUA_DONVIVANCHUYEN_MADVVC">
+          <End Role="DONVIVANCHUYEN" Type="Self.DONVIVANCHUYEN" Multiplicity="1" />
+          <End Role="DONMUA" Type="Self.DONMUA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DONVIVANCHUYEN">
+              <PropertyRef Name="MADONVI" />
+            </Principal>
+            <Dependent Role="DONMUA">
+              <PropertyRef Name="MADVVC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DONTHANG_DATHANG_ID_DONHANG">
+          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="1" />
+          <End Role="DONHANG" Type="Self.DONHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATHANG">
+              <PropertyRef Name="ID_DONHANG" />
+            </Principal>
+            <Dependent Role="DONHANG">
+              <PropertyRef Name="ID_DONHANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GIANHANG_THANHVIEN_ID_NGUOIBAN">
+          <End Role="THANHVIEN" Type="Self.THANHVIEN" Multiplicity="1" />
+          <End Role="GIANHANG" Type="Self.GIANHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID_THANHVIEN" />
+            </Principal>
+            <Dependent Role="GIANHANG">
+              <PropertyRef Name="ID_NGUOIBAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GIOHANG_HANGHOA">
+          <End Role="HANGHOA" Type="Self.HANGHOA" Multiplicity="1" />
+          <End Role="GIOHANG" Type="Self.GIOHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HANGHOA">
+              <PropertyRef Name="MAHANGHOA" />
+            </Principal>
+            <Dependent Role="GIOHANG">
+              <PropertyRef Name="MAHANGHOA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GIOHANG_THANHVIEN_ID_NGUOIMUA">
+          <End Role="THANHVIEN" Type="Self.THANHVIEN" Multiplicity="1" />
+          <End Role="GIOHANG" Type="Self.GIOHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID_THANHVIEN" />
+            </Principal>
+            <Dependent Role="GIOHANG">
+              <PropertyRef Name="ID_NGUOIMUA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HANGHOA_DANHMUC_LOAIHANGHOA">
+          <End Role="DANHMUC" Type="Self.DANHMUC" Multiplicity="1" />
+          <End Role="HANGHOA" Type="Self.HANGHOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DANHMUC">
+              <PropertyRef Name="MALOAI" />
+            </Principal>
+            <Dependent Role="HANGHOA">
+              <PropertyRef Name="LOAIHANGHOA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICHSUDANHGIAGIANHANG_GIANHANG_MAGIANHANG">
+          <End Role="GIANHANG" Type="Self.GIANHANG" Multiplicity="1" />
+          <End Role="LICHSUDANHGIAGIANHANG" Type="Self.LICHSUDANHGIAGIANHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIANHANG">
+              <PropertyRef Name="MAGIANHANG" />
+            </Principal>
+            <Dependent Role="LICHSUDANHGIAGIANHANG">
+              <PropertyRef Name="MAGIANHANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICHSUDANHGIAGIANHANG_THANHVIEN_ID_NGUOIMUA">
+          <End Role="THANHVIEN" Type="Self.THANHVIEN" Multiplicity="1" />
+          <End Role="LICHSUDANHGIAGIANHANG" Type="Self.LICHSUDANHGIAGIANHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID_THANHVIEN" />
+            </Principal>
+            <Dependent Role="LICHSUDANHGIAGIANHANG">
+              <PropertyRef Name="ID_NGUOIMUA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICHSUDANHGIAHANGHOA_HANGHOA_MAHANGHOA">
+          <End Role="HANGHOA" Type="Self.HANGHOA" Multiplicity="1" />
+          <End Role="LICHSUDANHGIAHANGHOA" Type="Self.LICHSUDANHGIAHANGHOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HANGHOA">
+              <PropertyRef Name="MAHANGHOA" />
+            </Principal>
+            <Dependent Role="LICHSUDANHGIAHANGHOA">
+              <PropertyRef Name="MAHANGHOA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICHSUDANHGIAHANGHOA1_THANHVIEN_ID_NGUOIMUA">
+          <End Role="THANHVIEN" Type="Self.THANHVIEN" Multiplicity="1" />
+          <End Role="LICHSUDANHGIAHANGHOA" Type="Self.LICHSUDANHGIAHANGHOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID_THANHVIEN" />
+            </Principal>
+            <Dependent Role="LICHSUDANHGIAHANGHOA">
+              <PropertyRef Name="ID_NGUOIMUA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICHSUTHEODOIGIANHANG_GIANHANG_ID_NGUOIMUA">
+          <End Role="THANHVIEN" Type="Self.THANHVIEN" Multiplicity="1" />
+          <End Role="LICHSUTHEODOIGIANHANG" Type="Self.LICHSUTHEODOIGIANHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID_THANHVIEN" />
+            </Principal>
+            <Dependent Role="LICHSUTHEODOIGIANHANG">
+              <PropertyRef Name="ID_NGUOIMUA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICHSUTHEODOIGIANHANG_GIANHANG_MAGIANHANG">
+          <End Role="GIANHANG" Type="Self.GIANHANG" Multiplicity="1" />
+          <End Role="LICHSUTHEODOIGIANHANG" Type="Self.LICHSUTHEODOIGIANHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIANHANG">
+              <PropertyRef Name="MAGIANHANG" />
+            </Principal>
+            <Dependent Role="LICHSUTHEODOIGIANHANG">
+              <PropertyRef Name="MAGIANHANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICHSUXEMHANGHOA_HANGHOA_MAHANGHOA">
+          <End Role="HANGHOA" Type="Self.HANGHOA" Multiplicity="1" />
+          <End Role="LICHSUXEMHANGHOA" Type="Self.LICHSUXEMHANGHOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HANGHOA">
+              <PropertyRef Name="MAHANGHOA" />
+            </Principal>
+            <Dependent Role="LICHSUXEMHANGHOA">
+              <PropertyRef Name="MAHANGHOA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICHSUXEMHANGHOA_THANHVIEN_ID_TAIKHOAN">
+          <End Role="THANHVIEN" Type="Self.THANHVIEN" Multiplicity="1" />
+          <End Role="LICHSUXEMHANGHOA" Type="Self.LICHSUXEMHANGHOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID_THANHVIEN" />
+            </Principal>
+            <Dependent Role="LICHSUXEMHANGHOA">
+              <PropertyRef Name="ID_TAIKHOAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TAIKHOAN_THANHVIEN_ID_THANHVIEN">
+          <End Role="THANHVIEN" Type="Self.THANHVIEN" Multiplicity="1" />
+          <End Role="TAIKHOANDANGNHAP" Type="Self.TAIKHOANDANGNHAP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID_THANHVIEN" />
+            </Principal>
+            <Dependent Role="TAIKHOANDANGNHAP">
+              <PropertyRef Name="ID_THANHVIEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THANHTOAN_DONHANG">
+          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="1" />
+          <End Role="THANHTOAN" Type="Self.THANHTOAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATHANG">
+              <PropertyRef Name="ID_DONHANG" />
+            </Principal>
+            <Dependent Role="THANHTOAN">
+              <PropertyRef Name="ID_DONHANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THANHTOAN_VOUCHER">
+          <End Role="VOUCHER" Type="Self.VOUCHER" Multiplicity="0..1" />
+          <End Role="THANHTOAN" Type="Self.THANHTOAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VOUCHER">
+              <PropertyRef Name="MACODE" />
+            </Principal>
+            <Dependent Role="THANHTOAN">
+              <PropertyRef Name="UUDAI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THONGTINDONHANG_DATHANG_ID_DONHANG">
+          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="1" />
+          <End Role="THONGTINDONHANG" Type="Self.THONGTINDONHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATHANG">
+              <PropertyRef Name="ID_DONHANG" />
+            </Principal>
+            <Dependent Role="THONGTINDONHANG">
+              <PropertyRef Name="ID_DONHANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THONGTINVANCHUYEN_DONMUA_MADONVAN">
+          <End Role="DONMUA" Type="Self.DONMUA" Multiplicity="1" />
+          <End Role="THONGTINVANCHUYEN" Type="Self.THONGTINVANCHUYEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DONMUA">
+              <PropertyRef Name="MADONVAN" />
+            </Principal>
+            <Dependent Role="THONGTINVANCHUYEN">
+              <PropertyRef Name="MADONVAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VOUCHER_GIANHANG_GIANHANG_MAGIANHANG">
+          <End Role="GIANHANG" Type="Self.GIANHANG" Multiplicity="1" />
+          <End Role="VOUCHER_GIANHANG" Type="Self.VOUCHER_GIANHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIANHANG">
+              <PropertyRef Name="MAGIANHANG" />
+            </Principal>
+            <Dependent Role="VOUCHER_GIANHANG">
+              <PropertyRef Name="MAGIANHANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VOUCHER_GIANHANG_VOUCHER_MAVOUCHER">
+          <End Role="VOUCHER" Type="Self.VOUCHER" Multiplicity="1" />
+          <End Role="VOUCHER_GIANHANG" Type="Self.VOUCHER_GIANHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VOUCHER">
+              <PropertyRef Name="MACODE" />
+            </Principal>
+            <Dependent Role="VOUCHER_GIANHANG">
+              <PropertyRef Name="MAVOUCHER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VOUCHER_LOAIVOUCHER_LOAIVOUCHER">
+          <End Role="LOAIVOUCHER" Type="Self.LOAIVOUCHER" Multiplicity="1" />
+          <End Role="VOUCHER" Type="Self.VOUCHER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAIVOUCHER">
+              <PropertyRef Name="MALOAIVOUCHER" />
+            </Principal>
+            <Dependent Role="VOUCHER">
+              <PropertyRef Name="LOAIVOUCHER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VOUCHER_NGANHHANG_NGANHHANG_MANGANHHANG">
+          <End Role="NGANHHANG" Type="Self.NGANHHANG" Multiplicity="1" />
+          <End Role="VOUCHER_NGANHHANG" Type="Self.VOUCHER_NGANHHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NGANHHANG">
+              <PropertyRef Name="MANGANHHANG" />
+            </Principal>
+            <Dependent Role="VOUCHER_NGANHHANG">
+              <PropertyRef Name="MANGANHHANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VOUCHER_NGANHHANG_VOUCHER_MAVOUCHER">
+          <End Role="VOUCHER" Type="Self.VOUCHER" Multiplicity="1" />
+          <End Role="VOUCHER_NGANHHANG" Type="Self.VOUCHER_NGANHHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VOUCHER">
+              <PropertyRef Name="MACODE" />
+            </Principal>
+            <Dependent Role="VOUCHER_NGANHHANG">
+              <PropertyRef Name="MAVOUCHER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VOUCHER_NGUOIDUNG_THANHVIEN_ID_NGUOIMUA">
+          <End Role="THANHVIEN" Type="Self.THANHVIEN" Multiplicity="1" />
+          <End Role="VOUCHER_NGUOIDUNG" Type="Self.VOUCHER_NGUOIDUNG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID_THANHVIEN" />
+            </Principal>
+            <Dependent Role="VOUCHER_NGUOIDUNG">
+              <PropertyRef Name="ID_NGUOIMUA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VOUCHER_NGUOIDUNG_VOUCHER_MAVOUCHER">
+          <End Role="VOUCHER" Type="Self.VOUCHER" Multiplicity="1" />
+          <End Role="VOUCHER_NGUOIDUNG" Type="Self.VOUCHER_NGUOIDUNG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VOUCHER">
+              <PropertyRef Name="MACODE" />
+            </Principal>
+            <Dependent Role="VOUCHER_NGUOIDUNG">
+              <PropertyRef Name="MAVOUCHER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="shopeeModelStoreContainer">
+          <EntitySet Name="DANHMUC" EntityType="Self.DANHMUC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DATHANG" EntityType="Self.DATHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DONHANG" EntityType="Self.DONHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DONMUA" EntityType="Self.DONMUA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DONVIVANCHUYEN" EntityType="Self.DONVIVANCHUYEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GIANHANG" EntityType="Self.GIANHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GIOHANG" EntityType="Self.GIOHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HANGHOA" EntityType="Self.HANGHOA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LICHSUDANHGIAGIANHANG" EntityType="Self.LICHSUDANHGIAGIANHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LICHSUDANHGIAHANGHOA" EntityType="Self.LICHSUDANHGIAHANGHOA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LICHSUTHEODOIGIANHANG" EntityType="Self.LICHSUTHEODOIGIANHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LICHSUXEMHANGHOA" EntityType="Self.LICHSUXEMHANGHOA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOAIVOUCHER" EntityType="Self.LOAIVOUCHER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NGANHHANG" EntityType="Self.NGANHHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAIKHOANDANGNHAP" EntityType="Self.TAIKHOANDANGNHAP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="THANHTOAN" EntityType="Self.THANHTOAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="THANHVIEN" EntityType="Self.THANHVIEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="THONGTINDONHANG" EntityType="Self.THONGTINDONHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="THONGTINVANCHUYEN" EntityType="Self.THONGTINVANCHUYEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VOUCHER" EntityType="Self.VOUCHER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VOUCHER_GIANHANG" EntityType="Self.VOUCHER_GIANHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VOUCHER_NGANHHANG" EntityType="Self.VOUCHER_NGANHHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VOUCHER_NGUOIDUNG" EntityType="Self.VOUCHER_NGUOIDUNG" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__DATHANG__GIANHAN__5070F446" Association="Self.FK__DATHANG__GIANHAN__5070F446">
+            <End Role="GIANHANG" EntitySet="GIANHANG" />
+            <End Role="DATHANG" EntitySet="DATHANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DATHANG__MADVVC__4F7CD00D" Association="Self.FK__DATHANG__MADVVC__4F7CD00D">
+            <End Role="DONVIVANCHUYEN" EntitySet="DONVIVANCHUYEN" />
+            <End Role="DATHANG" EntitySet="DATHANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HANGHOA__MAGIANH__3C69FB99" Association="Self.FK__HANGHOA__MAGIANH__3C69FB99">
+            <End Role="GIANHANG" EntitySet="GIANHANG" />
+            <End Role="HANGHOA" EntitySet="HANGHOA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DANHMUC_NGANHHANG_NGANHHANG" Association="Self.FK_DANHMUC_NGANHHANG_NGANHHANG">
+            <End Role="NGANHHANG" EntitySet="NGANHHANG" />
+            <End Role="DANHMUC" EntitySet="DANHMUC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DATHANG_THANHVIEN_NGUOIMUA" Association="Self.FK_DATHANG_THANHVIEN_NGUOIMUA">
+            <End Role="THANHVIEN" EntitySet="THANHVIEN" />
+            <End Role="DATHANG" EntitySet="DATHANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DONHANG_HANGHOA" Association="Self.FK_DONHANG_HANGHOA">
+            <End Role="HANGHOA" EntitySet="HANGHOA" />
+            <End Role="DONHANG" EntitySet="DONHANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DONMUA_DATHANG_ID_DONHANG" Association="Self.FK_DONMUA_DATHANG_ID_DONHANG">
+            <End Role="DATHANG" EntitySet="DATHANG" />
+            <End Role="DONMUA" EntitySet="DONMUA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DONMUA_DONVIVANCHUYEN_MADVVC" Association="Self.FK_DONMUA_DONVIVANCHUYEN_MADVVC">
+            <End Role="DONVIVANCHUYEN" EntitySet="DONVIVANCHUYEN" />
+            <End Role="DONMUA" EntitySet="DONMUA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DONTHANG_DATHANG_ID_DONHANG" Association="Self.FK_DONTHANG_DATHANG_ID_DONHANG">
+            <End Role="DATHANG" EntitySet="DATHANG" />
+            <End Role="DONHANG" EntitySet="DONHANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GIANHANG_THANHVIEN_ID_NGUOIBAN" Association="Self.FK_GIANHANG_THANHVIEN_ID_NGUOIBAN">
+            <End Role="THANHVIEN" EntitySet="THANHVIEN" />
+            <End Role="GIANHANG" EntitySet="GIANHANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GIOHANG_HANGHOA" Association="Self.FK_GIOHANG_HANGHOA">
+            <End Role="HANGHOA" EntitySet="HANGHOA" />
+            <End Role="GIOHANG" EntitySet="GIOHANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GIOHANG_THANHVIEN_ID_NGUOIMUA" Association="Self.FK_GIOHANG_THANHVIEN_ID_NGUOIMUA">
+            <End Role="THANHVIEN" EntitySet="THANHVIEN" />
+            <End Role="GIOHANG" EntitySet="GIOHANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HANGHOA_DANHMUC_LOAIHANGHOA" Association="Self.FK_HANGHOA_DANHMUC_LOAIHANGHOA">
+            <End Role="DANHMUC" EntitySet="DANHMUC" />
+            <End Role="HANGHOA" EntitySet="HANGHOA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICHSUDANHGIAGIANHANG_GIANHANG_MAGIANHANG" Association="Self.FK_LICHSUDANHGIAGIANHANG_GIANHANG_MAGIANHANG">
+            <End Role="GIANHANG" EntitySet="GIANHANG" />
+            <End Role="LICHSUDANHGIAGIANHANG" EntitySet="LICHSUDANHGIAGIANHANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICHSUDANHGIAGIANHANG_THANHVIEN_ID_NGUOIMUA" Association="Self.FK_LICHSUDANHGIAGIANHANG_THANHVIEN_ID_NGUOIMUA">
+            <End Role="THANHVIEN" EntitySet="THANHVIEN" />
+            <End Role="LICHSUDANHGIAGIANHANG" EntitySet="LICHSUDANHGIAGIANHANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICHSUDANHGIAHANGHOA_HANGHOA_MAHANGHOA" Association="Self.FK_LICHSUDANHGIAHANGHOA_HANGHOA_MAHANGHOA">
+            <End Role="HANGHOA" EntitySet="HANGHOA" />
+            <End Role="LICHSUDANHGIAHANGHOA" EntitySet="LICHSUDANHGIAHANGHOA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICHSUDANHGIAHANGHOA1_THANHVIEN_ID_NGUOIMUA" Association="Self.FK_LICHSUDANHGIAHANGHOA1_THANHVIEN_ID_NGUOIMUA">
+            <End Role="THANHVIEN" EntitySet="THANHVIEN" />
+            <End Role="LICHSUDANHGIAHANGHOA" EntitySet="LICHSUDANHGIAHANGHOA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICHSUTHEODOIGIANHANG_GIANHANG_ID_NGUOIMUA" Association="Self.FK_LICHSUTHEODOIGIANHANG_GIANHANG_ID_NGUOIMUA">
+            <End Role="THANHVIEN" EntitySet="THANHVIEN" />
+            <End Role="LICHSUTHEODOIGIANHANG" EntitySet="LICHSUTHEODOIGIANHANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICHSUTHEODOIGIANHANG_GIANHANG_MAGIANHANG" Association="Self.FK_LICHSUTHEODOIGIANHANG_GIANHANG_MAGIANHANG">
+            <End Role="GIANHANG" EntitySet="GIANHANG" />
+            <End Role="LICHSUTHEODOIGIANHANG" EntitySet="LICHSUTHEODOIGIANHANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICHSUXEMHANGHOA_HANGHOA_MAHANGHOA" Association="Self.FK_LICHSUXEMHANGHOA_HANGHOA_MAHANGHOA">
+            <End Role="HANGHOA" EntitySet="HANGHOA" />
+            <End Role="LICHSUXEMHANGHOA" EntitySet="LICHSUXEMHANGHOA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICHSUXEMHANGHOA_THANHVIEN_ID_TAIKHOAN" Association="Self.FK_LICHSUXEMHANGHOA_THANHVIEN_ID_TAIKHOAN">
+            <End Role="THANHVIEN" EntitySet="THANHVIEN" />
+            <End Role="LICHSUXEMHANGHOA" EntitySet="LICHSUXEMHANGHOA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TAIKHOAN_THANHVIEN_ID_THANHVIEN" Association="Self.FK_TAIKHOAN_THANHVIEN_ID_THANHVIEN">
+            <End Role="THANHVIEN" EntitySet="THANHVIEN" />
+            <End Role="TAIKHOANDANGNHAP" EntitySet="TAIKHOANDANGNHAP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THANHTOAN_DONHANG" Association="Self.FK_THANHTOAN_DONHANG">
+            <End Role="DATHANG" EntitySet="DATHANG" />
+            <End Role="THANHTOAN" EntitySet="THANHTOAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THANHTOAN_VOUCHER" Association="Self.FK_THANHTOAN_VOUCHER">
+            <End Role="VOUCHER" EntitySet="VOUCHER" />
+            <End Role="THANHTOAN" EntitySet="THANHTOAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THONGTINDONHANG_DATHANG_ID_DONHANG" Association="Self.FK_THONGTINDONHANG_DATHANG_ID_DONHANG">
+            <End Role="DATHANG" EntitySet="DATHANG" />
+            <End Role="THONGTINDONHANG" EntitySet="THONGTINDONHANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THONGTINVANCHUYEN_DONMUA_MADONVAN" Association="Self.FK_THONGTINVANCHUYEN_DONMUA_MADONVAN">
+            <End Role="DONMUA" EntitySet="DONMUA" />
+            <End Role="THONGTINVANCHUYEN" EntitySet="THONGTINVANCHUYEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VOUCHER_GIANHANG_GIANHANG_MAGIANHANG" Association="Self.FK_VOUCHER_GIANHANG_GIANHANG_MAGIANHANG">
+            <End Role="GIANHANG" EntitySet="GIANHANG" />
+            <End Role="VOUCHER_GIANHANG" EntitySet="VOUCHER_GIANHANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VOUCHER_GIANHANG_VOUCHER_MAVOUCHER" Association="Self.FK_VOUCHER_GIANHANG_VOUCHER_MAVOUCHER">
+            <End Role="VOUCHER" EntitySet="VOUCHER" />
+            <End Role="VOUCHER_GIANHANG" EntitySet="VOUCHER_GIANHANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VOUCHER_LOAIVOUCHER_LOAIVOUCHER" Association="Self.FK_VOUCHER_LOAIVOUCHER_LOAIVOUCHER">
+            <End Role="LOAIVOUCHER" EntitySet="LOAIVOUCHER" />
+            <End Role="VOUCHER" EntitySet="VOUCHER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VOUCHER_NGANHHANG_NGANHHANG_MANGANHHANG" Association="Self.FK_VOUCHER_NGANHHANG_NGANHHANG_MANGANHHANG">
+            <End Role="NGANHHANG" EntitySet="NGANHHANG" />
+            <End Role="VOUCHER_NGANHHANG" EntitySet="VOUCHER_NGANHHANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VOUCHER_NGANHHANG_VOUCHER_MAVOUCHER" Association="Self.FK_VOUCHER_NGANHHANG_VOUCHER_MAVOUCHER">
+            <End Role="VOUCHER" EntitySet="VOUCHER" />
+            <End Role="VOUCHER_NGANHHANG" EntitySet="VOUCHER_NGANHHANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VOUCHER_NGUOIDUNG_THANHVIEN_ID_NGUOIMUA" Association="Self.FK_VOUCHER_NGUOIDUNG_THANHVIEN_ID_NGUOIMUA">
+            <End Role="THANHVIEN" EntitySet="THANHVIEN" />
+            <End Role="VOUCHER_NGUOIDUNG" EntitySet="VOUCHER_NGUOIDUNG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VOUCHER_NGUOIDUNG_VOUCHER_MAVOUCHER" Association="Self.FK_VOUCHER_NGUOIDUNG_VOUCHER_MAVOUCHER">
+            <End Role="VOUCHER" EntitySet="VOUCHER" />
+            <End Role="VOUCHER_NGUOIDUNG" EntitySet="VOUCHER_NGUOIDUNG" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="shopeeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DANHMUC">
+          <Key>
+            <PropertyRef Name="MALOAI" />
+          </Key>
+          <Property Name="MALOAI" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TENLOAI" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CHITIETLOAI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NGANHHANG" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="NGANHHANG1" Relationship="Self.FK_DANHMUC_NGANHHANG_NGANHHANG" FromRole="DANHMUC" ToRole="NGANHHANG" />
+          <NavigationProperty Name="HANGHOAs" Relationship="Self.FK_HANGHOA_DANHMUC_LOAIHANGHOA" FromRole="DANHMUC" ToRole="HANGHOA" />
+        </EntityType>
+        <EntityType Name="DATHANG">
+          <Key>
+            <PropertyRef Name="ID_DONHANG" />
+          </Key>
+          <Property Name="ID_DONHANG" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NGUOIMUA" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="GIANHANG" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NGAYDAT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TONGTIEN" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="MADVVC" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="GIANHANG1" Relationship="Self.FK__DATHANG__GIANHAN__5070F446" FromRole="DATHANG" ToRole="GIANHANG" />
+          <NavigationProperty Name="DONVIVANCHUYEN" Relationship="Self.FK__DATHANG__MADVVC__4F7CD00D" FromRole="DATHANG" ToRole="DONVIVANCHUYEN" />
+          <NavigationProperty Name="THANHVIEN" Relationship="Self.FK_DATHANG_THANHVIEN_NGUOIMUA" FromRole="DATHANG" ToRole="THANHVIEN" />
+          <NavigationProperty Name="DONMUAs" Relationship="Self.FK_DONMUA_DATHANG_ID_DONHANG" FromRole="DATHANG" ToRole="DONMUA" />
+          <NavigationProperty Name="DONHANGs" Relationship="Self.FK_DONTHANG_DATHANG_ID_DONHANG" FromRole="DATHANG" ToRole="DONHANG" />
+          <NavigationProperty Name="THANHTOANs" Relationship="Self.FK_THANHTOAN_DONHANG" FromRole="DATHANG" ToRole="THANHTOAN" />
+          <NavigationProperty Name="THONGTINDONHANGs" Relationship="Self.FK_THONGTINDONHANG_DATHANG_ID_DONHANG" FromRole="DATHANG" ToRole="THONGTINDONHANG" />
+        </EntityType>
+        <EntityType Name="DONHANG">
+          <Key>
+            <PropertyRef Name="ID_DONHANG" />
+            <PropertyRef Name="MASANPHAM" />
+          </Key>
+          <Property Name="ID_DONHANG" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MASANPHAM" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="SOLUONG" Type="Int32" Nullable="false" />
+          <Property Name="DONGIA" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="DATHANG" Relationship="Self.FK_DONTHANG_DATHANG_ID_DONHANG" FromRole="DONHANG" ToRole="DATHANG" />
+          <NavigationProperty Name="HANGHOA" Relationship="Self.FK_DONHANG_HANGHOA" FromRole="DONHANG" ToRole="HANGHOA" />
+        </EntityType>
+        <EntityType Name="DONMUA">
+          <Key>
+            <PropertyRef Name="MADONVAN" />
+          </Key>
+          <Property Name="MADONVAN" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MADVVC" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ID_DONHANG" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DATHANG" Relationship="Self.FK_DONMUA_DATHANG_ID_DONHANG" FromRole="DONMUA" ToRole="DATHANG" />
+          <NavigationProperty Name="DONVIVANCHUYEN" Relationship="Self.FK_DONMUA_DONVIVANCHUYEN_MADVVC" FromRole="DONMUA" ToRole="DONVIVANCHUYEN" />
+          <NavigationProperty Name="THONGTINVANCHUYENs" Relationship="Self.FK_THONGTINVANCHUYEN_DONMUA_MADONVAN" FromRole="DONMUA" ToRole="THONGTINVANCHUYEN" />
+        </EntityType>
+        <EntityType Name="DONVIVANCHUYEN">
+          <Key>
+            <PropertyRef Name="MADONVI" />
+          </Key>
+          <Property Name="MADONVI" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TENDONVI" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DIENTHOAI_DVVC" Type="Int32" Nullable="false" />
+          <Property Name="EMAIL_DVVC" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DATHANGs" Relationship="Self.FK__DATHANG__MADVVC__4F7CD00D" FromRole="DONVIVANCHUYEN" ToRole="DATHANG" />
+          <NavigationProperty Name="DONMUAs" Relationship="Self.FK_DONMUA_DONVIVANCHUYEN_MADVVC" FromRole="DONVIVANCHUYEN" ToRole="DONMUA" />
+        </EntityType>
+        <EntityType Name="GIANHANG">
+          <Key>
+            <PropertyRef Name="MAGIANHANG" />
+          </Key>
+          <Property Name="MAGIANHANG" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TENGIANHANG" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DANHGIA_GIANHANG" Type="Double" Nullable="false" />
+          <Property Name="LuongNguoiTheoDoi" Type="Int32" Nullable="false" />
+          <Property Name="ID_NGUOIBAN" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="LoaiGianHang" Type="String" MaxLength="6" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DATHANGs" Relationship="Self.FK__DATHANG__GIANHAN__5070F446" FromRole="GIANHANG" ToRole="DATHANG" />
+          <NavigationProperty Name="HANGHOAs" Relationship="Self.FK__HANGHOA__MAGIANH__3C69FB99" FromRole="GIANHANG" ToRole="HANGHOA" />
+          <NavigationProperty Name="THANHVIEN" Relationship="Self.FK_GIANHANG_THANHVIEN_ID_NGUOIBAN" FromRole="GIANHANG" ToRole="THANHVIEN" />
+          <NavigationProperty Name="LICHSUDANHGIAGIANHANGs" Relationship="Self.FK_LICHSUDANHGIAGIANHANG_GIANHANG_MAGIANHANG" FromRole="GIANHANG" ToRole="LICHSUDANHGIAGIANHANG" />
+          <NavigationProperty Name="THANHVIENs" Relationship="Self.LICHSUTHEODOIGIANHANG" FromRole="GIANHANG" ToRole="THANHVIEN" />
+          <NavigationProperty Name="VOUCHERs" Relationship="Self.VOUCHER_GIANHANG" FromRole="GIANHANG" ToRole="VOUCHER" />
+        </EntityType>
+        <EntityType Name="GIOHANG">
+          <Key>
+            <PropertyRef Name="ID_NGUOIMUA" />
+            <PropertyRef Name="MAHANGHOA" />
+          </Key>
+          <Property Name="ID_NGUOIMUA" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MAHANGHOA" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="SOLUONG" Type="Int32" Nullable="false" />
+          <Property Name="NGAYTHEM" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="HANGHOA" Relationship="Self.FK_GIOHANG_HANGHOA" FromRole="GIOHANG" ToRole="HANGHOA" />
+          <NavigationProperty Name="THANHVIEN" Relationship="Self.FK_GIOHANG_THANHVIEN_ID_NGUOIMUA" FromRole="GIOHANG" ToRole="THANHVIEN" />
+        </EntityType>
+        <EntityType Name="HANGHOA">
+          <Key>
+            <PropertyRef Name="MAHANGHOA" />
+          </Key>
+          <Property Name="MAHANGHOA" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TENHANGHOA" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MOTA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GIATHANH" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="SOLUONGTON" Type="Int32" Nullable="false" />
+          <Property Name="LOAIHANGHOA" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="HHFlag" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="DANHGIA_HANGHOA" Type="Double" Nullable="false" />
+          <Property Name="THOIHANSUDUNG" Type="DateTime" Precision="3" />
+          <Property Name="SOLUONGDABAN" Type="Int32" Nullable="false" />
+          <Property Name="MAGIANHANG" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NGAYDANG" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="HINHANH" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DANHMUC" Relationship="Self.FK_HANGHOA_DANHMUC_LOAIHANGHOA" FromRole="HANGHOA" ToRole="DANHMUC" />
+          <NavigationProperty Name="DONHANGs" Relationship="Self.FK_DONHANG_HANGHOA" FromRole="HANGHOA" ToRole="DONHANG" />
+          <NavigationProperty Name="GIANHANG" Relationship="Self.FK__HANGHOA__MAGIANH__3C69FB99" FromRole="HANGHOA" ToRole="GIANHANG" />
+          <NavigationProperty Name="GIOHANGs" Relationship="Self.FK_GIOHANG_HANGHOA" FromRole="HANGHOA" ToRole="GIOHANG" />
+          <NavigationProperty Name="LICHSUDANHGIAHANGHOAs" Relationship="Self.FK_LICHSUDANHGIAHANGHOA_HANGHOA_MAHANGHOA" FromRole="HANGHOA" ToRole="LICHSUDANHGIAHANGHOA" />
+          <NavigationProperty Name="LICHSUXEMHANGHOAs" Relationship="Self.FK_LICHSUXEMHANGHOA_HANGHOA_MAHANGHOA" FromRole="HANGHOA" ToRole="LICHSUXEMHANGHOA" />
+        </EntityType>
+        <EntityType Name="LICHSUDANHGIAGIANHANG">
+          <Key>
+            <PropertyRef Name="MAGIANHANG" />
+            <PropertyRef Name="ID_NGUOIMUA" />
+            <PropertyRef Name="NGAYDANHGIA_GIANHANG" />
+          </Key>
+          <Property Name="MAGIANHANG" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ID_NGUOIMUA" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NGAYDANHGIA_GIANHANG" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SOSAO_GIANHANG" Type="Int32" Nullable="false" />
+          <Property Name="NHANXET_GIANHANG" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GIANHANG" Relationship="Self.FK_LICHSUDANHGIAGIANHANG_GIANHANG_MAGIANHANG" FromRole="LICHSUDANHGIAGIANHANG" ToRole="GIANHANG" />
+          <NavigationProperty Name="THANHVIEN" Relationship="Self.FK_LICHSUDANHGIAGIANHANG_THANHVIEN_ID_NGUOIMUA" FromRole="LICHSUDANHGIAGIANHANG" ToRole="THANHVIEN" />
+        </EntityType>
+        <EntityType Name="LICHSUDANHGIAHANGHOA">
+          <Key>
+            <PropertyRef Name="MAHANGHOA" />
+            <PropertyRef Name="ID_NGUOIMUA" />
+            <PropertyRef Name="NGAYDANHGIA_HANGHOA" />
+          </Key>
+          <Property Name="MAHANGHOA" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ID_NGUOIMUA" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NGAYDANHGIA_HANGHOA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SOSAO_HANGHOA" Type="Int32" Nullable="false" />
+          <Property Name="NHANXET_HANGHOA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HANGHOA" Relationship="Self.FK_LICHSUDANHGIAHANGHOA_HANGHOA_MAHANGHOA" FromRole="LICHSUDANHGIAHANGHOA" ToRole="HANGHOA" />
+          <NavigationProperty Name="THANHVIEN" Relationship="Self.FK_LICHSUDANHGIAHANGHOA1_THANHVIEN_ID_NGUOIMUA" FromRole="LICHSUDANHGIAHANGHOA" ToRole="THANHVIEN" />
+        </EntityType>
+        <EntityType Name="LICHSUXEMHANGHOA">
+          <Key>
+            <PropertyRef Name="ID_TAIKHOAN" />
+            <PropertyRef Name="MAHANGHOA" />
+            <PropertyRef Name="THOIGIANTRUYCAP" />
+          </Key>
+          <Property Name="ID_TAIKHOAN" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MAHANGHOA" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="THOIGIANTRUYCAP" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="HANGHOA" Relationship="Self.FK_LICHSUXEMHANGHOA_HANGHOA_MAHANGHOA" FromRole="LICHSUXEMHANGHOA" ToRole="HANGHOA" />
+          <NavigationProperty Name="THANHVIEN" Relationship="Self.FK_LICHSUXEMHANGHOA_THANHVIEN_ID_TAIKHOAN" FromRole="LICHSUXEMHANGHOA" ToRole="THANHVIEN" />
+        </EntityType>
+        <EntityType Name="LOAIVOUCHER">
+          <Key>
+            <PropertyRef Name="MALOAIVOUCHER" />
+          </Key>
+          <Property Name="MALOAIVOUCHER" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TENLOAIVOUCHER" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DIEUKIEN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LOAIGIAM" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MUCGIA" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="UUDAI" Type="Int32" Nullable="false" />
+          <Property Name="GIAMTOIDA" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="VOUCHERs" Relationship="Self.FK_VOUCHER_LOAIVOUCHER_LOAIVOUCHER" FromRole="LOAIVOUCHER" ToRole="VOUCHER" />
+        </EntityType>
+        <EntityType Name="NGANHHANG">
+          <Key>
+            <PropertyRef Name="MANGANHHANG" />
+          </Key>
+          <Property Name="MANGANHHANG" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TENNGANHHANG" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DANHMUCs" Relationship="Self.FK_DANHMUC_NGANHHANG_NGANHHANG" FromRole="NGANHHANG" ToRole="DANHMUC" />
+          <NavigationProperty Name="VOUCHERs" Relationship="Self.VOUCHER_NGANHHANG" FromRole="NGANHHANG" ToRole="VOUCHER" />
+        </EntityType>
+        <EntityType Name="TAIKHOANDANGNHAP">
+          <Key>
+            <PropertyRef Name="ID_TAIKHOAN" />
+          </Key>
+          <Property Name="ID_TAIKHOAN" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TENDANGNHAP" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MATKHAU" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_THANHVIEN" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="THANHVIEN" Relationship="Self.FK_TAIKHOAN_THANHVIEN_ID_THANHVIEN" FromRole="TAIKHOANDANGNHAP" ToRole="THANHVIEN" />
+        </EntityType>
+        <EntityType Name="THANHTOAN">
+          <Key>
+            <PropertyRef Name="SO_THANHTOAN" />
+          </Key>
+          <Property Name="SO_THANHTOAN" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NGAYTHANHTOAN" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ID_DONHANG" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="SOTIENTT" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="UUDAI" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="LOAITHANHTOAN" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="HOANTIEN" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="LOAITTONLINE" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="DATHANG" Relationship="Self.FK_THANHTOAN_DONHANG" FromRole="THANHTOAN" ToRole="DATHANG" />
+          <NavigationProperty Name="VOUCHER" Relationship="Self.FK_THANHTOAN_VOUCHER" FromRole="THANHTOAN" ToRole="VOUCHER" />
+        </EntityType>
+        <EntityType Name="THANHVIEN">
+          <Key>
+            <PropertyRef Name="ID_THANHVIEN" />
+          </Key>
+          <Property Name="ID_THANHVIEN" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="EMAIL_TV" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DIENTHOAI_TV" Type="Int32" Nullable="false" />
+          <Property Name="DIACHI_TV" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NGUOIBANFLAG" Type="Int32" Nullable="false" />
+          <Property Name="NGUOIMUAFLAG" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DATHANGs" Relationship="Self.FK_DATHANG_THANHVIEN_NGUOIMUA" FromRole="THANHVIEN" ToRole="DATHANG" />
+          <NavigationProperty Name="GIANHANGs" Relationship="Self.FK_GIANHANG_THANHVIEN_ID_NGUOIBAN" FromRole="THANHVIEN" ToRole="GIANHANG" />
+          <NavigationProperty Name="GIOHANGs" Relationship="Self.FK_GIOHANG_THANHVIEN_ID_NGUOIMUA" FromRole="THANHVIEN" ToRole="GIOHANG" />
+          <NavigationProperty Name="LICHSUDANHGIAGIANHANGs" Relationship="Self.FK_LICHSUDANHGIAGIANHANG_THANHVIEN_ID_NGUOIMUA" FromRole="THANHVIEN" ToRole="LICHSUDANHGIAGIANHANG" />
+          <NavigationProperty Name="LICHSUDANHGIAHANGHOAs" Relationship="Self.FK_LICHSUDANHGIAHANGHOA1_THANHVIEN_ID_NGUOIMUA" FromRole="THANHVIEN" ToRole="LICHSUDANHGIAHANGHOA" />
+          <NavigationProperty Name="LICHSUXEMHANGHOAs" Relationship="Self.FK_LICHSUXEMHANGHOA_THANHVIEN_ID_TAIKHOAN" FromRole="THANHVIEN" ToRole="LICHSUXEMHANGHOA" />
+          <NavigationProperty Name="TAIKHOANDANGNHAPs" Relationship="Self.FK_TAIKHOAN_THANHVIEN_ID_THANHVIEN" FromRole="THANHVIEN" ToRole="TAIKHOANDANGNHAP" />
+          <NavigationProperty Name="VOUCHER_NGUOIDUNG" Relationship="Self.FK_VOUCHER_NGUOIDUNG_THANHVIEN_ID_NGUOIMUA" FromRole="THANHVIEN" ToRole="VOUCHER_NGUOIDUNG" />
+          <NavigationProperty Name="GIANHANGs1" Relationship="Self.LICHSUTHEODOIGIANHANG" FromRole="THANHVIEN" ToRole="GIANHANG" />
+        </EntityType>
+        <EntityType Name="THONGTINDONHANG">
+          <Key>
+            <PropertyRef Name="ID_DONHANG" />
+            <PropertyRef Name="THOIGIAN" />
+          </Key>
+          <Property Name="ID_DONHANG" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="THOIGIAN" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TINHTRANG_DH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DATHANG" Relationship="Self.FK_THONGTINDONHANG_DATHANG_ID_DONHANG" FromRole="THONGTINDONHANG" ToRole="DATHANG" />
+        </EntityType>
+        <EntityType Name="THONGTINVANCHUYEN">
+          <Key>
+            <PropertyRef Name="MADONVAN" />
+            <PropertyRef Name="THOIGIAN" />
+          </Key>
+          <Property Name="MADONVAN" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="THOIGIAN" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TINHTRANG_VC" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DONMUA" Relationship="Self.FK_THONGTINVANCHUYEN_DONMUA_MADONVAN" FromRole="THONGTINVANCHUYEN" ToRole="DONMUA" />
+        </EntityType>
+        <EntityType Name="VOUCHER">
+          <Key>
+            <PropertyRef Name="MACODE" />
+          </Key>
+          <Property Name="MACODE" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="THOIGIANAPDUNG" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LOAIVOUCHER" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="LOAIVOUCHER1" Relationship="Self.FK_VOUCHER_LOAIVOUCHER_LOAIVOUCHER" FromRole="VOUCHER" ToRole="LOAIVOUCHER" />
+          <NavigationProperty Name="THANHTOANs" Relationship="Self.FK_THANHTOAN_VOUCHER" FromRole="VOUCHER" ToRole="THANHTOAN" />
+          <NavigationProperty Name="VOUCHER_NGUOIDUNG" Relationship="Self.FK_VOUCHER_NGUOIDUNG_VOUCHER_MAVOUCHER" FromRole="VOUCHER" ToRole="VOUCHER_NGUOIDUNG" />
+          <NavigationProperty Name="GIANHANGs" Relationship="Self.VOUCHER_GIANHANG" FromRole="VOUCHER" ToRole="GIANHANG" />
+          <NavigationProperty Name="NGANHHANGs" Relationship="Self.VOUCHER_NGANHHANG" FromRole="VOUCHER" ToRole="NGANHHANG" />
+        </EntityType>
+        <EntityType Name="VOUCHER_NGUOIDUNG">
+          <Key>
+            <PropertyRef Name="MAVOUCHER" />
+            <PropertyRef Name="ID_NGUOIMUA" />
+          </Key>
+          <Property Name="MAVOUCHER" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ID_NGUOIMUA" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TRANGTHAIDUNG" Type="Int32" />
+          <NavigationProperty Name="THANHVIEN" Relationship="Self.FK_VOUCHER_NGUOIDUNG_THANHVIEN_ID_NGUOIMUA" FromRole="VOUCHER_NGUOIDUNG" ToRole="THANHVIEN" />
+          <NavigationProperty Name="VOUCHER" Relationship="Self.FK_VOUCHER_NGUOIDUNG_VOUCHER_MAVOUCHER" FromRole="VOUCHER_NGUOIDUNG" ToRole="VOUCHER" />
+        </EntityType>
+        <Association Name="FK_DANHMUC_NGANHHANG_NGANHHANG">
+          <End Role="NGANHHANG" Type="Self.NGANHHANG" Multiplicity="1" />
+          <End Role="DANHMUC" Type="Self.DANHMUC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NGANHHANG">
+              <PropertyRef Name="MANGANHHANG" />
+            </Principal>
+            <Dependent Role="DANHMUC">
+              <PropertyRef Name="NGANHHANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HANGHOA_DANHMUC_LOAIHANGHOA">
+          <End Role="DANHMUC" Type="Self.DANHMUC" Multiplicity="1" />
+          <End Role="HANGHOA" Type="Self.HANGHOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DANHMUC">
+              <PropertyRef Name="MALOAI" />
+            </Principal>
+            <Dependent Role="HANGHOA">
+              <PropertyRef Name="LOAIHANGHOA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DATHANG__GIANHAN__5070F446">
+          <End Role="GIANHANG" Type="Self.GIANHANG" Multiplicity="1" />
+          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIANHANG">
+              <PropertyRef Name="MAGIANHANG" />
+            </Principal>
+            <Dependent Role="DATHANG">
+              <PropertyRef Name="GIANHANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DATHANG__MADVVC__4F7CD00D">
+          <End Role="DONVIVANCHUYEN" Type="Self.DONVIVANCHUYEN" Multiplicity="1" />
+          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DONVIVANCHUYEN">
+              <PropertyRef Name="MADONVI" />
+            </Principal>
+            <Dependent Role="DATHANG">
+              <PropertyRef Name="MADVVC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DATHANG_THANHVIEN_NGUOIMUA">
+          <End Role="THANHVIEN" Type="Self.THANHVIEN" Multiplicity="1" />
+          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID_THANHVIEN" />
+            </Principal>
+            <Dependent Role="DATHANG">
+              <PropertyRef Name="NGUOIMUA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DONMUA_DATHANG_ID_DONHANG">
+          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="1" />
+          <End Role="DONMUA" Type="Self.DONMUA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATHANG">
+              <PropertyRef Name="ID_DONHANG" />
+            </Principal>
+            <Dependent Role="DONMUA">
+              <PropertyRef Name="ID_DONHANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DONTHANG_DATHANG_ID_DONHANG">
+          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="1" />
+          <End Role="DONHANG" Type="Self.DONHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATHANG">
+              <PropertyRef Name="ID_DONHANG" />
+            </Principal>
+            <Dependent Role="DONHANG">
+              <PropertyRef Name="ID_DONHANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THANHTOAN_DONHANG">
+          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="1" />
+          <End Role="THANHTOAN" Type="Self.THANHTOAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATHANG">
+              <PropertyRef Name="ID_DONHANG" />
+            </Principal>
+            <Dependent Role="THANHTOAN">
+              <PropertyRef Name="ID_DONHANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THONGTINDONHANG_DATHANG_ID_DONHANG">
+          <End Role="DATHANG" Type="Self.DATHANG" Multiplicity="1" />
+          <End Role="THONGTINDONHANG" Type="Self.THONGTINDONHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATHANG">
+              <PropertyRef Name="ID_DONHANG" />
+            </Principal>
+            <Dependent Role="THONGTINDONHANG">
+              <PropertyRef Name="ID_DONHANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DONHANG_HANGHOA">
+          <End Role="HANGHOA" Type="Self.HANGHOA" Multiplicity="1" />
+          <End Role="DONHANG" Type="Self.DONHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HANGHOA">
+              <PropertyRef Name="MAHANGHOA" />
+            </Principal>
+            <Dependent Role="DONHANG">
+              <PropertyRef Name="MASANPHAM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DONMUA_DONVIVANCHUYEN_MADVVC">
+          <End Role="DONVIVANCHUYEN" Type="Self.DONVIVANCHUYEN" Multiplicity="1" />
+          <End Role="DONMUA" Type="Self.DONMUA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DONVIVANCHUYEN">
+              <PropertyRef Name="MADONVI" />
+            </Principal>
+            <Dependent Role="DONMUA">
+              <PropertyRef Name="MADVVC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THONGTINVANCHUYEN_DONMUA_MADONVAN">
+          <End Role="DONMUA" Type="Self.DONMUA" Multiplicity="1" />
+          <End Role="THONGTINVANCHUYEN" Type="Self.THONGTINVANCHUYEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DONMUA">
+              <PropertyRef Name="MADONVAN" />
+            </Principal>
+            <Dependent Role="THONGTINVANCHUYEN">
+              <PropertyRef Name="MADONVAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HANGHOA__MAGIANH__3C69FB99">
+          <End Role="GIANHANG" Type="Self.GIANHANG" Multiplicity="1" />
+          <End Role="HANGHOA" Type="Self.HANGHOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIANHANG">
+              <PropertyRef Name="MAGIANHANG" />
+            </Principal>
+            <Dependent Role="HANGHOA">
+              <PropertyRef Name="MAGIANHANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GIANHANG_THANHVIEN_ID_NGUOIBAN">
+          <End Role="THANHVIEN" Type="Self.THANHVIEN" Multiplicity="1" />
+          <End Role="GIANHANG" Type="Self.GIANHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID_THANHVIEN" />
+            </Principal>
+            <Dependent Role="GIANHANG">
+              <PropertyRef Name="ID_NGUOIBAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICHSUDANHGIAGIANHANG_GIANHANG_MAGIANHANG">
+          <End Role="GIANHANG" Type="Self.GIANHANG" Multiplicity="1" />
+          <End Role="LICHSUDANHGIAGIANHANG" Type="Self.LICHSUDANHGIAGIANHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GIANHANG">
+              <PropertyRef Name="MAGIANHANG" />
+            </Principal>
+            <Dependent Role="LICHSUDANHGIAGIANHANG">
+              <PropertyRef Name="MAGIANHANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GIOHANG_HANGHOA">
+          <End Role="HANGHOA" Type="Self.HANGHOA" Multiplicity="1" />
+          <End Role="GIOHANG" Type="Self.GIOHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HANGHOA">
+              <PropertyRef Name="MAHANGHOA" />
+            </Principal>
+            <Dependent Role="GIOHANG">
+              <PropertyRef Name="MAHANGHOA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GIOHANG_THANHVIEN_ID_NGUOIMUA">
+          <End Role="THANHVIEN" Type="Self.THANHVIEN" Multiplicity="1" />
+          <End Role="GIOHANG" Type="Self.GIOHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID_THANHVIEN" />
+            </Principal>
+            <Dependent Role="GIOHANG">
+              <PropertyRef Name="ID_NGUOIMUA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICHSUDANHGIAHANGHOA_HANGHOA_MAHANGHOA">
+          <End Role="HANGHOA" Type="Self.HANGHOA" Multiplicity="1" />
+          <End Role="LICHSUDANHGIAHANGHOA" Type="Self.LICHSUDANHGIAHANGHOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HANGHOA">
+              <PropertyRef Name="MAHANGHOA" />
+            </Principal>
+            <Dependent Role="LICHSUDANHGIAHANGHOA">
+              <PropertyRef Name="MAHANGHOA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICHSUXEMHANGHOA_HANGHOA_MAHANGHOA">
+          <End Role="HANGHOA" Type="Self.HANGHOA" Multiplicity="1" />
+          <End Role="LICHSUXEMHANGHOA" Type="Self.LICHSUXEMHANGHOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HANGHOA">
+              <PropertyRef Name="MAHANGHOA" />
+            </Principal>
+            <Dependent Role="LICHSUXEMHANGHOA">
+              <PropertyRef Name="MAHANGHOA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICHSUDANHGIAGIANHANG_THANHVIEN_ID_NGUOIMUA">
+          <End Role="THANHVIEN" Type="Self.THANHVIEN" Multiplicity="1" />
+          <End Role="LICHSUDANHGIAGIANHANG" Type="Self.LICHSUDANHGIAGIANHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID_THANHVIEN" />
+            </Principal>
+            <Dependent Role="LICHSUDANHGIAGIANHANG">
+              <PropertyRef Name="ID_NGUOIMUA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICHSUDANHGIAHANGHOA1_THANHVIEN_ID_NGUOIMUA">
+          <End Role="THANHVIEN" Type="Self.THANHVIEN" Multiplicity="1" />
+          <End Role="LICHSUDANHGIAHANGHOA" Type="Self.LICHSUDANHGIAHANGHOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID_THANHVIEN" />
+            </Principal>
+            <Dependent Role="LICHSUDANHGIAHANGHOA">
+              <PropertyRef Name="ID_NGUOIMUA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LICHSUXEMHANGHOA_THANHVIEN_ID_TAIKHOAN">
+          <End Role="THANHVIEN" Type="Self.THANHVIEN" Multiplicity="1" />
+          <End Role="LICHSUXEMHANGHOA" Type="Self.LICHSUXEMHANGHOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID_THANHVIEN" />
+            </Principal>
+            <Dependent Role="LICHSUXEMHANGHOA">
+              <PropertyRef Name="ID_TAIKHOAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VOUCHER_LOAIVOUCHER_LOAIVOUCHER">
+          <End Role="LOAIVOUCHER" Type="Self.LOAIVOUCHER" Multiplicity="1" />
+          <End Role="VOUCHER" Type="Self.VOUCHER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAIVOUCHER">
+              <PropertyRef Name="MALOAIVOUCHER" />
+            </Principal>
+            <Dependent Role="VOUCHER">
+              <PropertyRef Name="LOAIVOUCHER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TAIKHOAN_THANHVIEN_ID_THANHVIEN">
+          <End Role="THANHVIEN" Type="Self.THANHVIEN" Multiplicity="1" />
+          <End Role="TAIKHOANDANGNHAP" Type="Self.TAIKHOANDANGNHAP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID_THANHVIEN" />
+            </Principal>
+            <Dependent Role="TAIKHOANDANGNHAP">
+              <PropertyRef Name="ID_THANHVIEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THANHTOAN_VOUCHER">
+          <End Role="VOUCHER" Type="Self.VOUCHER" Multiplicity="0..1" />
+          <End Role="THANHTOAN" Type="Self.THANHTOAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VOUCHER">
+              <PropertyRef Name="MACODE" />
+            </Principal>
+            <Dependent Role="THANHTOAN">
+              <PropertyRef Name="UUDAI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VOUCHER_NGUOIDUNG_THANHVIEN_ID_NGUOIMUA">
+          <End Role="THANHVIEN" Type="Self.THANHVIEN" Multiplicity="1" />
+          <End Role="VOUCHER_NGUOIDUNG" Type="Self.VOUCHER_NGUOIDUNG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THANHVIEN">
+              <PropertyRef Name="ID_THANHVIEN" />
+            </Principal>
+            <Dependent Role="VOUCHER_NGUOIDUNG">
+              <PropertyRef Name="ID_NGUOIMUA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VOUCHER_NGUOIDUNG_VOUCHER_MAVOUCHER">
+          <End Role="VOUCHER" Type="Self.VOUCHER" Multiplicity="1" />
+          <End Role="VOUCHER_NGUOIDUNG" Type="Self.VOUCHER_NGUOIDUNG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VOUCHER">
+              <PropertyRef Name="MACODE" />
+            </Principal>
+            <Dependent Role="VOUCHER_NGUOIDUNG">
+              <PropertyRef Name="MAVOUCHER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LICHSUTHEODOIGIANHANG">
+          <End Role="THANHVIEN" Type="Self.THANHVIEN" Multiplicity="*" />
+          <End Role="GIANHANG" Type="Self.GIANHANG" Multiplicity="*" />
+        </Association>
+        <Association Name="VOUCHER_GIANHANG">
+          <End Role="GIANHANG" Type="Self.GIANHANG" Multiplicity="*" />
+          <End Role="VOUCHER" Type="Self.VOUCHER" Multiplicity="*" />
+        </Association>
+        <Association Name="VOUCHER_NGANHHANG">
+          <End Role="NGANHHANG" Type="Self.NGANHHANG" Multiplicity="*" />
+          <End Role="VOUCHER" Type="Self.VOUCHER" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="shopeeEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DANHMUCs" EntityType="Self.DANHMUC" />
+          <EntitySet Name="DATHANGs" EntityType="Self.DATHANG" />
+          <EntitySet Name="DONHANGs" EntityType="Self.DONHANG" />
+          <EntitySet Name="DONMUAs" EntityType="Self.DONMUA" />
+          <EntitySet Name="DONVIVANCHUYENs" EntityType="Self.DONVIVANCHUYEN" />
+          <EntitySet Name="GIANHANGs" EntityType="Self.GIANHANG" />
+          <EntitySet Name="GIOHANGs" EntityType="Self.GIOHANG" />
+          <EntitySet Name="HANGHOAs" EntityType="Self.HANGHOA" />
+          <EntitySet Name="LICHSUDANHGIAGIANHANGs" EntityType="Self.LICHSUDANHGIAGIANHANG" />
+          <EntitySet Name="LICHSUDANHGIAHANGHOAs" EntityType="Self.LICHSUDANHGIAHANGHOA" />
+          <EntitySet Name="LICHSUXEMHANGHOAs" EntityType="Self.LICHSUXEMHANGHOA" />
+          <EntitySet Name="LOAIVOUCHERs" EntityType="Self.LOAIVOUCHER" />
+          <EntitySet Name="NGANHHANGs" EntityType="Self.NGANHHANG" />
+          <EntitySet Name="TAIKHOANDANGNHAPs" EntityType="Self.TAIKHOANDANGNHAP" />
+          <EntitySet Name="THANHTOANs" EntityType="Self.THANHTOAN" />
+          <EntitySet Name="THANHVIENs" EntityType="Self.THANHVIEN" />
+          <EntitySet Name="THONGTINDONHANGs" EntityType="Self.THONGTINDONHANG" />
+          <EntitySet Name="THONGTINVANCHUYENs" EntityType="Self.THONGTINVANCHUYEN" />
+          <EntitySet Name="VOUCHERs" EntityType="Self.VOUCHER" />
+          <EntitySet Name="VOUCHER_NGUOIDUNG" EntityType="Self.VOUCHER_NGUOIDUNG" />
+          <AssociationSet Name="FK_DANHMUC_NGANHHANG_NGANHHANG" Association="Self.FK_DANHMUC_NGANHHANG_NGANHHANG">
+            <End Role="NGANHHANG" EntitySet="NGANHHANGs" />
+            <End Role="DANHMUC" EntitySet="DANHMUCs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HANGHOA_DANHMUC_LOAIHANGHOA" Association="Self.FK_HANGHOA_DANHMUC_LOAIHANGHOA">
+            <End Role="DANHMUC" EntitySet="DANHMUCs" />
+            <End Role="HANGHOA" EntitySet="HANGHOAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DATHANG__GIANHAN__5070F446" Association="Self.FK__DATHANG__GIANHAN__5070F446">
+            <End Role="GIANHANG" EntitySet="GIANHANGs" />
+            <End Role="DATHANG" EntitySet="DATHANGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DATHANG__MADVVC__4F7CD00D" Association="Self.FK__DATHANG__MADVVC__4F7CD00D">
+            <End Role="DONVIVANCHUYEN" EntitySet="DONVIVANCHUYENs" />
+            <End Role="DATHANG" EntitySet="DATHANGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DATHANG_THANHVIEN_NGUOIMUA" Association="Self.FK_DATHANG_THANHVIEN_NGUOIMUA">
+            <End Role="THANHVIEN" EntitySet="THANHVIENs" />
+            <End Role="DATHANG" EntitySet="DATHANGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DONMUA_DATHANG_ID_DONHANG" Association="Self.FK_DONMUA_DATHANG_ID_DONHANG">
+            <End Role="DATHANG" EntitySet="DATHANGs" />
+            <End Role="DONMUA" EntitySet="DONMUAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DONTHANG_DATHANG_ID_DONHANG" Association="Self.FK_DONTHANG_DATHANG_ID_DONHANG">
+            <End Role="DATHANG" EntitySet="DATHANGs" />
+            <End Role="DONHANG" EntitySet="DONHANGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THANHTOAN_DONHANG" Association="Self.FK_THANHTOAN_DONHANG">
+            <End Role="DATHANG" EntitySet="DATHANGs" />
+            <End Role="THANHTOAN" EntitySet="THANHTOANs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THONGTINDONHANG_DATHANG_ID_DONHANG" Association="Self.FK_THONGTINDONHANG_DATHANG_ID_DONHANG">
+            <End Role="DATHANG" EntitySet="DATHANGs" />
+            <End Role="THONGTINDONHANG" EntitySet="THONGTINDONHANGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DONHANG_HANGHOA" Association="Self.FK_DONHANG_HANGHOA">
+            <End Role="HANGHOA" EntitySet="HANGHOAs" />
+            <End Role="DONHANG" EntitySet="DONHANGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DONMUA_DONVIVANCHUYEN_MADVVC" Association="Self.FK_DONMUA_DONVIVANCHUYEN_MADVVC">
+            <End Role="DONVIVANCHUYEN" EntitySet="DONVIVANCHUYENs" />
+            <End Role="DONMUA" EntitySet="DONMUAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THONGTINVANCHUYEN_DONMUA_MADONVAN" Association="Self.FK_THONGTINVANCHUYEN_DONMUA_MADONVAN">
+            <End Role="DONMUA" EntitySet="DONMUAs" />
+            <End Role="THONGTINVANCHUYEN" EntitySet="THONGTINVANCHUYENs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HANGHOA__MAGIANH__3C69FB99" Association="Self.FK__HANGHOA__MAGIANH__3C69FB99">
+            <End Role="GIANHANG" EntitySet="GIANHANGs" />
+            <End Role="HANGHOA" EntitySet="HANGHOAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GIANHANG_THANHVIEN_ID_NGUOIBAN" Association="Self.FK_GIANHANG_THANHVIEN_ID_NGUOIBAN">
+            <End Role="THANHVIEN" EntitySet="THANHVIENs" />
+            <End Role="GIANHANG" EntitySet="GIANHANGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICHSUDANHGIAGIANHANG_GIANHANG_MAGIANHANG" Association="Self.FK_LICHSUDANHGIAGIANHANG_GIANHANG_MAGIANHANG">
+            <End Role="GIANHANG" EntitySet="GIANHANGs" />
+            <End Role="LICHSUDANHGIAGIANHANG" EntitySet="LICHSUDANHGIAGIANHANGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GIOHANG_HANGHOA" Association="Self.FK_GIOHANG_HANGHOA">
+            <End Role="HANGHOA" EntitySet="HANGHOAs" />
+            <End Role="GIOHANG" EntitySet="GIOHANGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GIOHANG_THANHVIEN_ID_NGUOIMUA" Association="Self.FK_GIOHANG_THANHVIEN_ID_NGUOIMUA">
+            <End Role="THANHVIEN" EntitySet="THANHVIENs" />
+            <End Role="GIOHANG" EntitySet="GIOHANGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICHSUDANHGIAHANGHOA_HANGHOA_MAHANGHOA" Association="Self.FK_LICHSUDANHGIAHANGHOA_HANGHOA_MAHANGHOA">
+            <End Role="HANGHOA" EntitySet="HANGHOAs" />
+            <End Role="LICHSUDANHGIAHANGHOA" EntitySet="LICHSUDANHGIAHANGHOAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICHSUXEMHANGHOA_HANGHOA_MAHANGHOA" Association="Self.FK_LICHSUXEMHANGHOA_HANGHOA_MAHANGHOA">
+            <End Role="HANGHOA" EntitySet="HANGHOAs" />
+            <End Role="LICHSUXEMHANGHOA" EntitySet="LICHSUXEMHANGHOAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICHSUDANHGIAGIANHANG_THANHVIEN_ID_NGUOIMUA" Association="Self.FK_LICHSUDANHGIAGIANHANG_THANHVIEN_ID_NGUOIMUA">
+            <End Role="THANHVIEN" EntitySet="THANHVIENs" />
+            <End Role="LICHSUDANHGIAGIANHANG" EntitySet="LICHSUDANHGIAGIANHANGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICHSUDANHGIAHANGHOA1_THANHVIEN_ID_NGUOIMUA" Association="Self.FK_LICHSUDANHGIAHANGHOA1_THANHVIEN_ID_NGUOIMUA">
+            <End Role="THANHVIEN" EntitySet="THANHVIENs" />
+            <End Role="LICHSUDANHGIAHANGHOA" EntitySet="LICHSUDANHGIAHANGHOAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LICHSUXEMHANGHOA_THANHVIEN_ID_TAIKHOAN" Association="Self.FK_LICHSUXEMHANGHOA_THANHVIEN_ID_TAIKHOAN">
+            <End Role="THANHVIEN" EntitySet="THANHVIENs" />
+            <End Role="LICHSUXEMHANGHOA" EntitySet="LICHSUXEMHANGHOAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VOUCHER_LOAIVOUCHER_LOAIVOUCHER" Association="Self.FK_VOUCHER_LOAIVOUCHER_LOAIVOUCHER">
+            <End Role="LOAIVOUCHER" EntitySet="LOAIVOUCHERs" />
+            <End Role="VOUCHER" EntitySet="VOUCHERs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TAIKHOAN_THANHVIEN_ID_THANHVIEN" Association="Self.FK_TAIKHOAN_THANHVIEN_ID_THANHVIEN">
+            <End Role="THANHVIEN" EntitySet="THANHVIENs" />
+            <End Role="TAIKHOANDANGNHAP" EntitySet="TAIKHOANDANGNHAPs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THANHTOAN_VOUCHER" Association="Self.FK_THANHTOAN_VOUCHER">
+            <End Role="VOUCHER" EntitySet="VOUCHERs" />
+            <End Role="THANHTOAN" EntitySet="THANHTOANs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VOUCHER_NGUOIDUNG_THANHVIEN_ID_NGUOIMUA" Association="Self.FK_VOUCHER_NGUOIDUNG_THANHVIEN_ID_NGUOIMUA">
+            <End Role="THANHVIEN" EntitySet="THANHVIENs" />
+            <End Role="VOUCHER_NGUOIDUNG" EntitySet="VOUCHER_NGUOIDUNG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VOUCHER_NGUOIDUNG_VOUCHER_MAVOUCHER" Association="Self.FK_VOUCHER_NGUOIDUNG_VOUCHER_MAVOUCHER">
+            <End Role="VOUCHER" EntitySet="VOUCHERs" />
+            <End Role="VOUCHER_NGUOIDUNG" EntitySet="VOUCHER_NGUOIDUNG" />
+          </AssociationSet>
+          <AssociationSet Name="LICHSUTHEODOIGIANHANG" Association="Self.LICHSUTHEODOIGIANHANG">
+            <End Role="THANHVIEN" EntitySet="THANHVIENs" />
+            <End Role="GIANHANG" EntitySet="GIANHANGs" />
+          </AssociationSet>
+          <AssociationSet Name="VOUCHER_GIANHANG" Association="Self.VOUCHER_GIANHANG">
+            <End Role="GIANHANG" EntitySet="GIANHANGs" />
+            <End Role="VOUCHER" EntitySet="VOUCHERs" />
+          </AssociationSet>
+          <AssociationSet Name="VOUCHER_NGANHHANG" Association="Self.VOUCHER_NGANHHANG">
+            <End Role="NGANHHANG" EntitySet="NGANHHANGs" />
+            <End Role="VOUCHER" EntitySet="VOUCHERs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="shopeeModelStoreContainer" CdmEntityContainer="shopeeEntities3">
+          <EntitySetMapping Name="DANHMUCs">
+            <EntityTypeMapping TypeName="shopeeModel.DANHMUC">
+              <MappingFragment StoreEntitySet="DANHMUC">
+                <ScalarProperty Name="MALOAI" ColumnName="MALOAI" />
+                <ScalarProperty Name="TENLOAI" ColumnName="TENLOAI" />
+                <ScalarProperty Name="CHITIETLOAI" ColumnName="CHITIETLOAI" />
+                <ScalarProperty Name="NGANHHANG" ColumnName="NGANHHANG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DATHANGs">
+            <EntityTypeMapping TypeName="shopeeModel.DATHANG">
+              <MappingFragment StoreEntitySet="DATHANG">
+                <ScalarProperty Name="ID_DONHANG" ColumnName="ID_DONHANG" />
+                <ScalarProperty Name="NGUOIMUA" ColumnName="NGUOIMUA" />
+                <ScalarProperty Name="GIANHANG" ColumnName="GIANHANG" />
+                <ScalarProperty Name="NGAYDAT" ColumnName="NGAYDAT" />
+                <ScalarProperty Name="TONGTIEN" ColumnName="TONGTIEN" />
+                <ScalarProperty Name="MADVVC" ColumnName="MADVVC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DONHANGs">
+            <EntityTypeMapping TypeName="shopeeModel.DONHANG">
+              <MappingFragment StoreEntitySet="DONHANG">
+                <ScalarProperty Name="ID_DONHANG" ColumnName="ID_DONHANG" />
+                <ScalarProperty Name="MASANPHAM" ColumnName="MASANPHAM" />
+                <ScalarProperty Name="SOLUONG" ColumnName="SOLUONG" />
+                <ScalarProperty Name="DONGIA" ColumnName="DONGIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DONMUAs">
+            <EntityTypeMapping TypeName="shopeeModel.DONMUA">
+              <MappingFragment StoreEntitySet="DONMUA">
+                <ScalarProperty Name="MADONVAN" ColumnName="MADONVAN" />
+                <ScalarProperty Name="MADVVC" ColumnName="MADVVC" />
+                <ScalarProperty Name="ID_DONHANG" ColumnName="ID_DONHANG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DONVIVANCHUYENs">
+            <EntityTypeMapping TypeName="shopeeModel.DONVIVANCHUYEN">
+              <MappingFragment StoreEntitySet="DONVIVANCHUYEN">
+                <ScalarProperty Name="MADONVI" ColumnName="MADONVI" />
+                <ScalarProperty Name="TENDONVI" ColumnName="TENDONVI" />
+                <ScalarProperty Name="DIENTHOAI_DVVC" ColumnName="DIENTHOAI_DVVC" />
+                <ScalarProperty Name="EMAIL_DVVC" ColumnName="EMAIL_DVVC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GIANHANGs">
+            <EntityTypeMapping TypeName="shopeeModel.GIANHANG">
+              <MappingFragment StoreEntitySet="GIANHANG">
+                <ScalarProperty Name="MAGIANHANG" ColumnName="MAGIANHANG" />
+                <ScalarProperty Name="TENGIANHANG" ColumnName="TENGIANHANG" />
+                <ScalarProperty Name="DANHGIA_GIANHANG" ColumnName="DANHGIA_GIANHANG" />
+                <ScalarProperty Name="LuongNguoiTheoDoi" ColumnName="LuongNguoiTheoDoi" />
+                <ScalarProperty Name="ID_NGUOIBAN" ColumnName="ID_NGUOIBAN" />
+                <ScalarProperty Name="LoaiGianHang" ColumnName="LoaiGianHang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GIOHANGs">
+            <EntityTypeMapping TypeName="shopeeModel.GIOHANG">
+              <MappingFragment StoreEntitySet="GIOHANG">
+                <ScalarProperty Name="ID_NGUOIMUA" ColumnName="ID_NGUOIMUA" />
+                <ScalarProperty Name="MAHANGHOA" ColumnName="MAHANGHOA" />
+                <ScalarProperty Name="SOLUONG" ColumnName="SOLUONG" />
+                <ScalarProperty Name="NGAYTHEM" ColumnName="NGAYTHEM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HANGHOAs">
+            <EntityTypeMapping TypeName="shopeeModel.HANGHOA">
+              <MappingFragment StoreEntitySet="HANGHOA">
+                <ScalarProperty Name="MAHANGHOA" ColumnName="MAHANGHOA" />
+                <ScalarProperty Name="TENHANGHOA" ColumnName="TENHANGHOA" />
+                <ScalarProperty Name="MOTA" ColumnName="MOTA" />
+                <ScalarProperty Name="GIATHANH" ColumnName="GIATHANH" />
+                <ScalarProperty Name="SOLUONGTON" ColumnName="SOLUONGTON" />
+                <ScalarProperty Name="LOAIHANGHOA" ColumnName="LOAIHANGHOA" />
+                <ScalarProperty Name="HHFlag" ColumnName="HHFlag" />
+                <ScalarProperty Name="DANHGIA_HANGHOA" ColumnName="DANHGIA_HANGHOA" />
+                <ScalarProperty Name="THOIHANSUDUNG" ColumnName="THOIHANSUDUNG" />
+                <ScalarProperty Name="SOLUONGDABAN" ColumnName="SOLUONGDABAN" />
+                <ScalarProperty Name="MAGIANHANG" ColumnName="MAGIANHANG" />
+                <ScalarProperty Name="NGAYDANG" ColumnName="NGAYDANG" />
+                <ScalarProperty Name="HINHANH" ColumnName="HINHANH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LICHSUDANHGIAGIANHANGs">
+            <EntityTypeMapping TypeName="shopeeModel.LICHSUDANHGIAGIANHANG">
+              <MappingFragment StoreEntitySet="LICHSUDANHGIAGIANHANG">
+                <ScalarProperty Name="MAGIANHANG" ColumnName="MAGIANHANG" />
+                <ScalarProperty Name="ID_NGUOIMUA" ColumnName="ID_NGUOIMUA" />
+                <ScalarProperty Name="NGAYDANHGIA_GIANHANG" ColumnName="NGAYDANHGIA_GIANHANG" />
+                <ScalarProperty Name="SOSAO_GIANHANG" ColumnName="SOSAO_GIANHANG" />
+                <ScalarProperty Name="NHANXET_GIANHANG" ColumnName="NHANXET_GIANHANG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LICHSUDANHGIAHANGHOAs">
+            <EntityTypeMapping TypeName="shopeeModel.LICHSUDANHGIAHANGHOA">
+              <MappingFragment StoreEntitySet="LICHSUDANHGIAHANGHOA">
+                <ScalarProperty Name="MAHANGHOA" ColumnName="MAHANGHOA" />
+                <ScalarProperty Name="ID_NGUOIMUA" ColumnName="ID_NGUOIMUA" />
+                <ScalarProperty Name="NGAYDANHGIA_HANGHOA" ColumnName="NGAYDANHGIA_HANGHOA" />
+                <ScalarProperty Name="SOSAO_HANGHOA" ColumnName="SOSAO_HANGHOA" />
+                <ScalarProperty Name="NHANXET_HANGHOA" ColumnName="NHANXET_HANGHOA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LICHSUXEMHANGHOAs">
+            <EntityTypeMapping TypeName="shopeeModel.LICHSUXEMHANGHOA">
+              <MappingFragment StoreEntitySet="LICHSUXEMHANGHOA">
+                <ScalarProperty Name="ID_TAIKHOAN" ColumnName="ID_TAIKHOAN" />
+                <ScalarProperty Name="MAHANGHOA" ColumnName="MAHANGHOA" />
+                <ScalarProperty Name="THOIGIANTRUYCAP" ColumnName="THOIGIANTRUYCAP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOAIVOUCHERs">
+            <EntityTypeMapping TypeName="shopeeModel.LOAIVOUCHER">
+              <MappingFragment StoreEntitySet="LOAIVOUCHER">
+                <ScalarProperty Name="MALOAIVOUCHER" ColumnName="MALOAIVOUCHER" />
+                <ScalarProperty Name="TENLOAIVOUCHER" ColumnName="TENLOAIVOUCHER" />
+                <ScalarProperty Name="DIEUKIEN" ColumnName="DIEUKIEN" />
+                <ScalarProperty Name="LOAIGIAM" ColumnName="LOAIGIAM" />
+                <ScalarProperty Name="MUCGIA" ColumnName="MUCGIA" />
+                <ScalarProperty Name="UUDAI" ColumnName="UUDAI" />
+                <ScalarProperty Name="GIAMTOIDA" ColumnName="GIAMTOIDA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NGANHHANGs">
+            <EntityTypeMapping TypeName="shopeeModel.NGANHHANG">
+              <MappingFragment StoreEntitySet="NGANHHANG">
+                <ScalarProperty Name="MANGANHHANG" ColumnName="MANGANHHANG" />
+                <ScalarProperty Name="TENNGANHHANG" ColumnName="TENNGANHHANG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAIKHOANDANGNHAPs">
+            <EntityTypeMapping TypeName="shopeeModel.TAIKHOANDANGNHAP">
+              <MappingFragment StoreEntitySet="TAIKHOANDANGNHAP">
+                <ScalarProperty Name="ID_TAIKHOAN" ColumnName="ID_TAIKHOAN" />
+                <ScalarProperty Name="TENDANGNHAP" ColumnName="TENDANGNHAP" />
+                <ScalarProperty Name="MATKHAU" ColumnName="MATKHAU" />
+                <ScalarProperty Name="ID_THANHVIEN" ColumnName="ID_THANHVIEN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="THANHTOANs">
+            <EntityTypeMapping TypeName="shopeeModel.THANHTOAN">
+              <MappingFragment StoreEntitySet="THANHTOAN">
+                <ScalarProperty Name="SO_THANHTOAN" ColumnName="SO_THANHTOAN" />
+                <ScalarProperty Name="NGAYTHANHTOAN" ColumnName="NGAYTHANHTOAN" />
+                <ScalarProperty Name="ID_DONHANG" ColumnName="ID_DONHANG" />
+                <ScalarProperty Name="SOTIENTT" ColumnName="SOTIENTT" />
+                <ScalarProperty Name="UUDAI" ColumnName="UUDAI" />
+                <ScalarProperty Name="LOAITHANHTOAN" ColumnName="LOAITHANHTOAN" />
+                <ScalarProperty Name="HOANTIEN" ColumnName="HOANTIEN" />
+                <ScalarProperty Name="LOAITTONLINE" ColumnName="LOAITTONLINE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="THANHVIENs">
+            <EntityTypeMapping TypeName="shopeeModel.THANHVIEN">
+              <MappingFragment StoreEntitySet="THANHVIEN">
+                <ScalarProperty Name="ID_THANHVIEN" ColumnName="ID_THANHVIEN" />
+                <ScalarProperty Name="EMAIL_TV" ColumnName="EMAIL_TV" />
+                <ScalarProperty Name="DIENTHOAI_TV" ColumnName="DIENTHOAI_TV" />
+                <ScalarProperty Name="DIACHI_TV" ColumnName="DIACHI_TV" />
+                <ScalarProperty Name="NGUOIBANFLAG" ColumnName="NGUOIBANFLAG" />
+                <ScalarProperty Name="NGUOIMUAFLAG" ColumnName="NGUOIMUAFLAG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="THONGTINDONHANGs">
+            <EntityTypeMapping TypeName="shopeeModel.THONGTINDONHANG">
+              <MappingFragment StoreEntitySet="THONGTINDONHANG">
+                <ScalarProperty Name="ID_DONHANG" ColumnName="ID_DONHANG" />
+                <ScalarProperty Name="THOIGIAN" ColumnName="THOIGIAN" />
+                <ScalarProperty Name="TINHTRANG_DH" ColumnName="TINHTRANG_DH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="THONGTINVANCHUYENs">
+            <EntityTypeMapping TypeName="shopeeModel.THONGTINVANCHUYEN">
+              <MappingFragment StoreEntitySet="THONGTINVANCHUYEN">
+                <ScalarProperty Name="MADONVAN" ColumnName="MADONVAN" />
+                <ScalarProperty Name="THOIGIAN" ColumnName="THOIGIAN" />
+                <ScalarProperty Name="TINHTRANG_VC" ColumnName="TINHTRANG_VC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VOUCHERs">
+            <EntityTypeMapping TypeName="shopeeModel.VOUCHER">
+              <MappingFragment StoreEntitySet="VOUCHER">
+                <ScalarProperty Name="MACODE" ColumnName="MACODE" />
+                <ScalarProperty Name="THOIGIANAPDUNG" ColumnName="THOIGIANAPDUNG" />
+                <ScalarProperty Name="LOAIVOUCHER" ColumnName="LOAIVOUCHER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VOUCHER_NGUOIDUNG">
+            <EntityTypeMapping TypeName="shopeeModel.VOUCHER_NGUOIDUNG">
+              <MappingFragment StoreEntitySet="VOUCHER_NGUOIDUNG">
+                <ScalarProperty Name="MAVOUCHER" ColumnName="MAVOUCHER" />
+                <ScalarProperty Name="ID_NGUOIMUA" ColumnName="ID_NGUOIMUA" />
+                <ScalarProperty Name="TRANGTHAIDUNG" ColumnName="TRANGTHAIDUNG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="LICHSUTHEODOIGIANHANG" TypeName="shopeeModel.LICHSUTHEODOIGIANHANG" StoreEntitySet="LICHSUTHEODOIGIANHANG">
+            <EndProperty Name="THANHVIEN">
+              <ScalarProperty Name="ID_THANHVIEN" ColumnName="ID_NGUOIMUA" />
+            </EndProperty>
+            <EndProperty Name="GIANHANG">
+              <ScalarProperty Name="MAGIANHANG" ColumnName="MAGIANHANG" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="VOUCHER_GIANHANG" TypeName="shopeeModel.VOUCHER_GIANHANG" StoreEntitySet="VOUCHER_GIANHANG">
+            <EndProperty Name="GIANHANG">
+              <ScalarProperty Name="MAGIANHANG" ColumnName="MAGIANHANG" />
+            </EndProperty>
+            <EndProperty Name="VOUCHER">
+              <ScalarProperty Name="MACODE" ColumnName="MAVOUCHER" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="VOUCHER_NGANHHANG" TypeName="shopeeModel.VOUCHER_NGANHHANG" StoreEntitySet="VOUCHER_NGANHHANG">
+            <EndProperty Name="NGANHHANG">
+              <ScalarProperty Name="MANGANHHANG" ColumnName="MANGANHHANG" />
+            </EndProperty>
+            <EndProperty Name="VOUCHER">
+              <ScalarProperty Name="MACODE" ColumnName="MAVOUCHER" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

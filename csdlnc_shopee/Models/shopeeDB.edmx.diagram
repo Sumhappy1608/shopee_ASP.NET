@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9c14cf8c1b4448429e0111075b896b0b" Name="Diagram1">
+        <EntityTypeShape EntityType="shopeeModel.DANHMUC" Width="1.5" PointX="6" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="shopeeModel.DATHANG" Width="1.5" PointX="5.25" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="shopeeModel.DONHANG" Width="1.5" PointX="10.5" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="shopeeModel.DONMUA" Width="1.5" PointX="10.5" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="shopeeModel.DONVIVANCHUYEN" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="shopeeModel.GIANHANG" Width="1.5" PointX="3" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="shopeeModel.GIOHANG" Width="1.5" PointX="13.5" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="shopeeModel.HANGHOA" Width="1.5" PointX="8.25" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="shopeeModel.LICHSUDANHGIAGIANHANG" Width="1.5" PointX="8.25" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="shopeeModel.LICHSUDANHGIAHANGHOA" Width="1.5" PointX="13.5" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="shopeeModel.LICHSUXEMHANGHOA" Width="1.5" PointX="13.5" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="shopeeModel.LOAIVOUCHER" Width="1.5" PointX="3" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="shopeeModel.NGANHHANG" Width="1.5" PointX="3.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="shopeeModel.TAIKHOANDANGNHAP" Width="1.5" PointX="3" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="shopeeModel.THANHTOAN" Width="1.5" PointX="10.5" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="shopeeModel.THANHVIEN" Width="1.5" PointX="0.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="shopeeModel.THONGTINDONHANG" Width="1.5" PointX="7.5" PointY="26.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="shopeeModel.THONGTINVANCHUYEN" Width="1.5" PointX="12.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="shopeeModel.VOUCHER" Width="1.5" PointX="5.25" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="shopeeModel.VOUCHER_NGUOIDUNG" Width="1.5" PointX="7.5" PointY="23.5" IsExpanded="true" />
+        <AssociationConnector Association="shopeeModel.FK_DANHMUC_NGANHHANG_NGANHHANG" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK_HANGHOA_DANHMUC_LOAIHANGHOA" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK__DATHANG__GIANHAN__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK__DATHANG__MADVVC__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK_DATHANG_THANHVIEN_NGUOIMUA" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK_DONMUA_DATHANG_ID_DONHANG" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK_DONTHANG_DATHANG_ID_DONHANG" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK_THANHTOAN_DONHANG" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK_THONGTINDONHANG_DATHANG_ID_DONHANG" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK_DONHANG_HANGHOA" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK_DONMUA_DONVIVANCHUYEN_MADVVC" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK_THONGTINVANCHUYEN_DONMUA_MADONVAN" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK__HANGHOA__MAGIANH__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK_GIANHANG_THANHVIEN_ID_NGUOIBAN" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK_LICHSUDANHGIAGIANHANG_GIANHANG_MAGIANHANG" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK_GIOHANG_HANGHOA" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK_GIOHANG_THANHVIEN_ID_NGUOIMUA" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK_LICHSUDANHGIAHANGHOA_HANGHOA_MAHANGHOA" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK_LICHSUXEMHANGHOA_HANGHOA_MAHANGHOA" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK_LICHSUDANHGIAGIANHANG_THANHVIEN_ID_NGUOIMUA" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK_LICHSUDANHGIAHANGHOA1_THANHVIEN_ID_NGUOIMUA" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK_LICHSUXEMHANGHOA_THANHVIEN_ID_TAIKHOAN" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK_VOUCHER_LOAIVOUCHER_LOAIVOUCHER" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK_TAIKHOAN_THANHVIEN_ID_THANHVIEN" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK_THANHTOAN_VOUCHER" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK_VOUCHER_NGUOIDUNG_THANHVIEN_ID_NGUOIMUA" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.FK_VOUCHER_NGUOIDUNG_VOUCHER_MAVOUCHER" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.LICHSUTHEODOIGIANHANG" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.VOUCHER_GIANHANG" ManuallyRouted="false" />
+        <AssociationConnector Association="shopeeModel.VOUCHER_NGANHHANG" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
